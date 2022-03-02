@@ -51,7 +51,12 @@
 						</property>
 						<property>
 							<name>readonly</name>
-							<value>true</value>
+							<value>false</value>
+							<type>boolean</type>
+						</property>
+						<property>
+							<name>allowEditWithoutWarning</name>
+							<value></value>
 							<type>boolean</type>
 						</property>
 					</properties>
