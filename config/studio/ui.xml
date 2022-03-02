@@ -328,12 +328,12 @@
 				</widgets>
 			</leftSection>
 			<middleSection>
-				<!--/config/studio/static-assets/plugins/org/craftercms/plugin/translation/translateToolBarItem/apps/awsmedialiveconsole/index.modern.js-->
+				<!--/config/studio/static-assets/plugins/org/craftercms/plugin/translation/translateToolBarItem/apps/toolbar/index.js-->
 				<widgets>
 					<widget id="craftercms.components.PreviewAddressBar"/>
 
 				    <widget id="translation">
-				    	<plugin id="org.craftercms.plugin.translation.translateToolBarItem"
+				    	<plugin id="translation"
 				                site="{site}"
 				                type="apps"
 				                name="toolbar"
