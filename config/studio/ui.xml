@@ -317,14 +317,6 @@
 
 
 
-    <widget id="org.craftercms.plugin.translation.translateToolBarItem">
-    	<plugin id="org.craftercms.plugin.translation.translateToolBarItem"
-                site="{site}"
-                type="apps"
-                name="awsmedialiveconsole"
-                file="index.modern.js"/>
-            </widget>
-
 
 
 	<widget id="craftercms.components.PreviewToolbar">
@@ -337,6 +329,15 @@
 			</leftSection>
 			<middleSection>
 				<widgets>
+				    <widget id="org.craftercms.plugin.translation.translateToolBarItem">
+				    	<plugin id="org.craftercms.plugin.translation.translateToolBarItem"
+				                site="{site}"
+				                type="apps"
+				                name="awsmedialiveconsole"
+				                file="index.modern.js"/>
+				            </widget>
+
+					
 					<widget id="craftercms.components.PreviewAddressBar"/>
 				</widgets>
 			</middleSection>
