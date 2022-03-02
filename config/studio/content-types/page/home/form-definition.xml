@@ -272,7 +272,7 @@
 		</section>
 		<section>
 			<title>Translation</title>
-			<description>When copying content across locales, the default behavior is as Related Content (hreflang attributes are added to this page, the source page and all other copies of the source page). If you want to override this behavior and have no alternatives for this page, click on the Unlink button below (if the button is not shown the page is not a copy, so it can't be unlinked).</description>
+			<description></description>
 			<defaultOpen>false</defaultOpen>
 			<fields>
 				<field>
