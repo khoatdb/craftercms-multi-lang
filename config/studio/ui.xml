@@ -328,10 +328,10 @@
 				</widgets>
 			</leftSection>
 			<middleSection>
-				<!--/config/studio/static-assets/plugins/org/craftercms/plugin/translation/translateToolBarItem/apps/toolbar/index.js-->
+				<!--/config/studio/static-assets/plugins/translation/apps/toolbar/index.js-->
 				<widgets>
 					<widget id="craftercms.components.PreviewAddressBar"/>
-
+					<!--
 				    <widget id="translation">
 				    	<plugin id="translation"
 				                site="{site}"
@@ -339,7 +339,7 @@
 				                name="toolbar"
 				                file="index.js"/>
 				            </widget>
-
+					-->
 
 				</widgets>
 			</middleSection>
