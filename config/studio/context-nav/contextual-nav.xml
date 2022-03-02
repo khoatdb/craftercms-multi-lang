@@ -47,6 +47,17 @@
             <module><moduleName>wcm_dropdown</moduleName><value>wcm_dropdown</value></module>
             <module><moduleName>quick-create</moduleName><value>quick-create</value></module>
             <module><moduleName>wcm_content</moduleName><value>wcm_content</value></module>
+            <module>
+              <plugin>
+                <type>context-nav</type>
+                <name>translate</name>
+                <file>index.js</file>
+              </plugin>
+              <params>
+					<widget>popup</widget>
+				</params>
+            </module>
+            
             <module><moduleName>admin_console</moduleName><value>admin_console</value></module>
 
             <module><moduleName>preview_tools</moduleName><value>preview_tools</value></module>
