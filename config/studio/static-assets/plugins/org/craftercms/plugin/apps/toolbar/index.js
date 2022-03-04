@@ -728,14 +728,14 @@ var objectGetOwnPropertySymbols = {
 var concat$3 = functionUncurryThis([].concat);
 
 // all object keys, includes non-enumerable and symbols
-var ownKeys = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
+var ownKeys$1 = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
   var keys = objectGetOwnPropertyNames.f(anObject(it));
   var getOwnPropertySymbols = objectGetOwnPropertySymbols.f;
   return getOwnPropertySymbols ? concat$3(keys, getOwnPropertySymbols(it)) : keys;
 };
 
 var copyConstructorProperties = function (target, source, exceptions) {
-  var keys = ownKeys(source);
+  var keys = ownKeys$1(source);
   var defineProperty = objectDefineProperty.f;
   var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
   for (var i = 0; i < keys.length; i++) {
@@ -5419,7 +5419,7 @@ _export({ target: 'Object', stat: true, sham: !descriptors }, {
   getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
     var O = toIndexedObject(object);
     var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
-    var keys = ownKeys(O);
+    var keys = ownKeys$1(O);
     var result = {};
     var index = 0;
     var key, descriptor;
@@ -6535,7 +6535,7 @@ _export({ target: 'Reflect', stat: true }, {
 // `Reflect.ownKeys` method
 // https://tc39.es/ecma262/#sec-reflect.ownkeys
 _export({ target: 'Reflect', stat: true }, {
-  ownKeys: ownKeys
+  ownKeys: ownKeys$1
 });
 
 // `Reflect.preventExtensions` method
@@ -12638,6 +12638,32 @@ try {
   }
 }
 });
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+
+  return target;
+}
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -32639,16 +32665,62 @@ var StudioAPI = {
     return CookieHelper.get('crafterSite');
   },
   getSelectedItems: function getSelectedItems() {
-    return CStudioAuthoring.SelectedContent.getSelectedContent().map(function (item) {
-      return {
-        name: item.internalName,
-        path: item.uri,
-        contentType: item.contentType
-      };
-    });
+    var selectedPath = craftercms.getStore().getState().preview.guest.path;
+    if (!selectedPath) return [];
+    var item = craftercms.getStore().getState().content.itemsByPath[craftercms.getStore().getState().preview.guest.path];
+    if (!item) return [];
+    return [{
+      name: item.label,
+      path: item.path,
+      contentType: item.contentTypeId
+    }];
   },
   openEditForm: function openEditForm(contentType, path) {
-    return CStudioAuthoring.Operations.editContent(contentType, CStudioAuthoringContext.site, path, '', path, false, null, new Array());
+    var site = CrafterCMSNext.system.store.getState().sites.active;
+    var authoringBase = CrafterCMSNext.system.store.getState().env.authoringBase;
+    var eventIdSuccess = 'editDialogSuccess';
+    var eventIdDismissed = 'editDialogDismissed';
+    return CrafterCMSNext.system.store.dispatch({
+      type: 'SHOW_EDIT_DIALOG',
+      payload: _objectSpread2(_objectSpread2({
+        site: site,
+        path: path,
+        type: 'form',
+        authoringBase: authoringBase,
+        readonly: false,
+        // TODO: make this configurable
+        isHidden: !!message.embeddedItemId
+      }, message.embeddedItemId ? {
+        modelId: message.embeddedItemId
+      } : {
+        iceGroupId: message.iceId
+      }), {}, {
+        onSaveSuccess: {
+          type: 'BATCH_ACTIONS',
+          payload: [{
+            type: 'DISPATCH_DOM_EVENT',
+            payload: {
+              id: eventIdSuccess
+            }
+          }, {
+            type: 'SHOW_EDIT_ITEM_SUCCESS_NOTIFICATION'
+          }, {
+            type: 'CLOSE_EDIT_DIALOG'
+          }]
+        },
+        onCancel: {
+          type: 'BATCH_ACTIONS',
+          payload: [{
+            type: 'CLOSE_EDIT_DIALOG'
+          }, {
+            type: 'DISPATCH_DOM_EVENT',
+            payload: {
+              id: eventIdDismissed
+            }
+          }]
+        }
+      })
+    });
   },
   getChildrenPaths: function getChildrenPaths(path) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -33429,8 +33501,6 @@ function FileSystemNavigator(_ref) {
   }));
 }
 
-var DEFAULT_WEBSITE_PATH = '/site/website';
-var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
 /**
  * Theme style to align with Crafter CMS 3.1.x
@@ -33452,29 +33522,6 @@ var customTheme = createTheme({
     }
   }
 });
-/**
- * Get root directory
- * If all /site/website => root directory
- * If all /site/components => root directory
- * Default: /site
- * @returns root directory
- */
-
-var getRootDir = function getRootDir(items) {
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_WEBSITE_PATH);
-  })) {
-    return DEFAULT_WEBSITE_PATH;
-  }
-
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_COMPONENT_PATH);
-  })) {
-    return DEFAULT_COMPONENT_PATH;
-  }
-
-  return null;
-};
 
 var Alert = /*#__PURE__*/React$1.forwardRef(function Alert(props, ref) {
   return /*#__PURE__*/React$1.createElement(MuiAlert, _extends$1({
@@ -33542,13 +33589,13 @@ function App() {
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedItems = _useState6[0],
-      setSelectedItems = _useState6[1];
+      selectedItems = _useState6[0];
+      _useState6[1];
 
   var _useState7 = useState(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      rootDir = _useState8[0],
-      setRootDir = _useState8[1];
+      rootDir = _useState8[0];
+      _useState8[1];
 
   var _useState9 = useState(''),
       _useState10 = _slicedToArray(_useState9, 2),
@@ -33683,22 +33730,12 @@ function App() {
   };
 
   React$1.useEffect(function () {
-    var handleContentMenuChanged = function handleContentMenuChanged() {
-      var items = StudioAPI.getSelectedItems();
-      setSelectedItems(items);
-      setRootDir(getRootDir(items));
-    };
+    // CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
+    // return () => {
+    //   CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
+    //   CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
+    // }
 
-    CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, {
-      subscriber: 'translate-plugin'
-    });
-    CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, {
-      subscriber: 'translate-plugin'
-    });
-    return function () {
-      CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-      CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    };
   }, []);
   React$1.useEffect(function () {
     copyDestSub.subscribe(function (path) {
