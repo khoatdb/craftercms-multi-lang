@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -26,8 +26,8 @@ import StyledDialogComponent from './StyledDialog';
 import StudioAPI from '../api/studio';
 
 export default function NewFolderDialog({ open, onClose, path }) {
-  const [folderName, setFolderName] = React.useState('');
-  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [folderName, setFolderName] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const onSubmit = async () => {
     if (folderName && path) {

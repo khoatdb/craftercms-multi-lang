@@ -1,98 +1,104 @@
-/*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
-import commit from 'rollup-plugin-commit';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import replaceImportsWithVars from 'rollup-plugin-replace-imports-with-vars';
+import json from '@rollup/plugin-json';
+import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
-import {terser} from 'rollup-plugin-terser';
+import babel from 'rollup-plugin-babel';
+import replace from '@rollup/plugin-replace';
 
-const plugins = [
-  replace({ 'process.env.NODE_ENV': '"production"' }),
-  babel({
-    exclude: 'node_modules/**',
-    presets: [
-      '@babel/preset-env',
-      [ '@babel/preset-react', {
-        'runtime': 'automatic'
-      }]
-    ],
-    plugins: [
-      'babel-plugin-transform-react-remove-prop-types',
-      '@babel/plugin-proposal-nullish-coalescing-operator',
-      '@babel/plugin-proposal-optional-chaining'
-    ]
-  }),
-  resolve(),
-  commonjs({
-    include: /node_modules/,
-    namedExports: {
-      'react-is': ['isValidElementType', 'ForwardRef', 'Memo', 'isFragment'],
-      'prop-types': ['elementType'],
-      'react/jsx-runtime': ['jsx', 'jsxs', 'Fragment'],
-      'react/jsx-dev-runtime': ['jsx', 'jsxs', 'jsxDEV']
-    }
-  }),
-  terser({
-    ecma: 2020,
-    module: true,
-    warnings: true,
-  }),
-  copy({
-    targets: [{ src: 'build/*', dest: '../../config/studio/plugins/context-nav/translate' }],
-    hook: 'writeBundle'
-  }),
-  // commit({
-  //   targets: [
-  //     '../../config/studio/plugins/context-nav/translate/index.js'
-  //   ]
-  // })
-];
+const { exec } = require('child_process');
 
-const external = [
-  'rxjs',
-  'rxjs/operators',
-  'react',
-  'react-dom',
-  'CrafterCMSNext',
-  '@craftercms/studio'
-];
+const extensions = ['.js', '.jsx'];
 
 const globals = {
-  'rxjs': 'window.CrafterCMSNext.rxjs',
-  'rxjs/operators': 'window.CrafterCMSNext.rxjs.operators',
-  'react': 'window.CrafterCMSNext.React',
-  'react-dom': 'window.CrafterCMSNext.ReactDOM',
-  'CrafterCMSNext': 'window.CrafterCMSNext',
-  '@craftercms/studio': 'window.CrafterCMSNext'
-};
+  react: 'craftercms.libs.React',
+  '@emotion/css': 'craftercms.libs.EmotionCSS',
+  '@emotion/css/create-instance': 'craftercms.libs.createEmotion',
+  'react-dom': 'craftercms.libs.ReactDOM',
+  'react-intl': 'craftercms.libs.ReactIntl',
+  '@mui/material': 'craftercms.libs.MaterialUI',
+  '@craftercms/studio-ui': 'craftercms.libs.StudioUI',
+  '@mui/material/utils': 'craftercms.libs.MaterialUI',
+  'rxjs': 'CrafterCMSNext.rxjs',
+}
 
-export default [
-  {
-    input: 'src/index.js',
-    external,
-    output: {
-      sourcemap: 'inline',
-      name: 'studioPluginTranslateItem',
-      file: 'build/index.js',
-      format: 'iife',
-      globals
-    },
-    plugins
+function cleanName(name) {
+  if (name.includes('/')) {
+    const i = name.lastIndexOf('/');
+    return name.substr(i + 1);
   }
-];
+  return name;
+}
+
+function commitMessage(tpl, file) {
+  const now = new Date();
+  const date = `${now.getFullYear()}.${now.getDate()}.${now.getDay()}`;
+  const time = `${now.getHours()}:${now.getMinutes()}`;
+  return tpl.replace('{file}', file).replace('{date}', date).replace('{time}', time);
+}
+
+function rollupPluginCommit() {
+  const target = '../../config/studio/static-assets/plugins/org/craftercms/plugin/translate/apps/toolbar/index.js';
+  const message = 'Updates to {file} @ {date} {time}';
+  return {
+    name: 'rollup-plugin-commit',
+    writeBundle() {
+      if (target) {
+        const callback = (op) => (error, stdout, stderr) => (error)
+            ? console.error(stderr || `Failed to ${op} "${target}" \n ${error.cmd}. ${stdout ? ('\n' + stdout) : ''}`)
+            : console.log(stdout || `Git ${op} successful for "${target}".`);
+        exec(
+          `git add ${target} ${
+            '&&'
+          } git commit ${target} -m "${commitMessage(message, cleanName(target))}"`,
+          callback('add/commit')
+        );
+      }
+    }
+  };
+}
+
+export default {
+  input: pkg.source,
+  output: [
+    {
+      file: pkg.module,
+      format: 'es',
+      globals,
+    }
+  ],
+  external: Object.keys(globals),
+  plugins: [
+    babel({
+      exclude: 'node_modules/**',
+      presets: [
+        ['@babel/preset-env', { modules: false }],
+        '@babel/preset-react',
+      ],
+      plugins: [
+        'babel-plugin-transform-react-remove-prop-types',
+        '@babel/plugin-proposal-nullish-coalescing-operator',
+        '@babel/plugin-proposal-optional-chaining'
+      ],
+    }),
+    json(),
+    replace({
+      preventAssignment: true,
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'import * as': 'import',
+    }),
+    replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
+    resolve({
+      extensions,
+      jsnext: true,
+      browser: true
+    }),
+    commonjs(),
+    copy({
+      targets: [{ src: 'dist/*', dest: '../../config/studio/static-assets/plugins/org/craftercms/plugin/translate/apps/toolbar/' }],
+      hook: 'writeBundle'
+    }),
+    rollupPluginCommit()
+  ]
+}

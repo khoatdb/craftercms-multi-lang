@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import Table from '@mui/material/Table';
@@ -35,13 +35,13 @@ import StudioAPI from '../api/studio';
 import { copyDestSub } from '../service/subscribe';
 
 export default function FileSystemNavigator({ selectedItems, rootDir }) {
-  const [nodes, setNodes] = React.useState([]);
-  const [expanded, setExpanded] = React.useState([]);
-  const [selected, setSelected] = React.useState('');
-  const [rightClickAnchorEl, setRightClickAnchorEl] = React.useState(null);
-  const [rightClickPosition, setRightClickPosition] = React.useState({});
-  const [newFolderDialogOpen, setNewFolderDialogOpen] = React.useState(false);
-  const [renameFolderDialogOpen, setRenameFolderDialogOpen] = React.useState(false);
+  const [nodes, setNodes] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+  const [selected, setSelected] = useState('');
+  const [rightClickAnchorEl, setRightClickAnchorEl] = useState(null);
+  const [rightClickPosition, setRightClickPosition] = useState({});
+  const [newFolderDialogOpen, setNewFolderDialogOpen] = useState(false);
+  const [renameFolderDialogOpen, setRenameFolderDialogOpen] = useState(false);
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
@@ -121,7 +121,7 @@ export default function FileSystemNavigator({ selectedItems, rootDir }) {
     setNodes(Object.assign({}, nodes));
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async function() {
       const items = await StudioAPI.getChildrenPaths(rootDir);
       const childNodes = items.map(item => (
