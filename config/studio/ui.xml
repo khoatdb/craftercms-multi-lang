@@ -340,6 +340,12 @@
 				                file="index.js"/>
 				            </widget>
 					-->
+					<widget id="org.craftercms.translatePlugin.components.reactComponent">
+					    <plugin id="org.craftercms.plugin"
+					        type="apps"
+					        name="toolbar"
+					        file="index.js" />
+					</widget>
 
 				</widgets>
 			</middleSection>
