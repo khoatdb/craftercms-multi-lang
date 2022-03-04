@@ -32997,15 +32997,15 @@ function NewFolderDialog(_ref) {
       onClose = _ref.onClose,
       path = _ref.path;
 
-  var _React$useState = React$1.useState(''),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      folderName = _React$useState2[0],
-      setFolderName = _React$useState2[1];
+  var _useState = useState(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      folderName = _useState2[0],
+      setFolderName = _useState2[1];
 
-  var _React$useState3 = React$1.useState(false),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      isProcessing = _React$useState4[0],
-      setIsProcessing = _React$useState4[1];
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isProcessing = _useState4[0],
+      setIsProcessing = _useState4[1];
 
   var onSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -33085,17 +33085,17 @@ function RenameFolderDialog(_ref) {
       onClose = _ref.onClose,
       path = _ref.path;
 
-  var _React$useState = React$1.useState(''),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      folderName = _React$useState2[0],
-      setFolderName = _React$useState2[1];
+  var _useState = useState(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      folderName = _useState2[0],
+      setFolderName = _useState2[1];
 
-  var _React$useState3 = React$1.useState(false),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      isProcessing = _React$useState4[0],
-      setIsProcessing = _React$useState4[1];
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isProcessing = _useState4[0],
+      setIsProcessing = _useState4[1];
 
-  React$1.useEffect(function () {
+  useEffect(function () {
     if (path) {
       setFolderName(path.split('/').pop());
     }
@@ -33193,40 +33193,40 @@ function FileSystemNavigator(_ref) {
   _ref.selectedItems;
       var rootDir = _ref.rootDir;
 
-  var _React$useState = React$1.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      nodes = _React$useState2[0],
-      setNodes = _React$useState2[1];
+  var _useState = useState([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      nodes = _useState2[0],
+      setNodes = _useState2[1];
 
-  var _React$useState3 = React$1.useState([]),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      expanded = _React$useState4[0],
-      setExpanded = _React$useState4[1];
+  var _useState3 = useState([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      expanded = _useState4[0],
+      setExpanded = _useState4[1];
 
-  var _React$useState5 = React$1.useState(''),
-      _React$useState6 = _slicedToArray(_React$useState5, 2),
-      selected = _React$useState6[0],
-      setSelected = _React$useState6[1];
+  var _useState5 = useState(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      selected = _useState6[0],
+      setSelected = _useState6[1];
 
-  var _React$useState7 = React$1.useState(null),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      rightClickAnchorEl = _React$useState8[0],
-      setRightClickAnchorEl = _React$useState8[1];
+  var _useState7 = useState(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      rightClickAnchorEl = _useState8[0],
+      setRightClickAnchorEl = _useState8[1];
 
-  var _React$useState9 = React$1.useState({}),
-      _React$useState10 = _slicedToArray(_React$useState9, 2),
-      rightClickPosition = _React$useState10[0],
-      setRightClickPosition = _React$useState10[1];
+  var _useState9 = useState({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      rightClickPosition = _useState10[0],
+      setRightClickPosition = _useState10[1];
 
-  var _React$useState11 = React$1.useState(false),
-      _React$useState12 = _slicedToArray(_React$useState11, 2),
-      newFolderDialogOpen = _React$useState12[0],
-      setNewFolderDialogOpen = _React$useState12[1];
+  var _useState11 = useState(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      newFolderDialogOpen = _useState12[0],
+      setNewFolderDialogOpen = _useState12[1];
 
-  var _React$useState13 = React$1.useState(false),
-      _React$useState14 = _slicedToArray(_React$useState13, 2),
-      renameFolderDialogOpen = _React$useState14[0],
-      setRenameFolderDialogOpen = _React$useState14[1];
+  var _useState13 = useState(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      renameFolderDialogOpen = _useState14[0],
+      setRenameFolderDialogOpen = _useState14[1];
 
   var handleToggle = function handleToggle(event, nodeIds) {
     setExpanded(nodeIds);
@@ -33362,7 +33362,7 @@ function FileSystemNavigator(_ref) {
     };
   }();
 
-  React$1.useEffect(function () {
+  useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var items, childNodes;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
