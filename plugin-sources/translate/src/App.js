@@ -212,7 +212,6 @@ export default function App() {
   const onClickCopy = (event) => {
     const items = StudioAPI.getSelectedItems();
     console.log(items);
-    setSelectedItems(items);
     setOpen(true)
   };
 
