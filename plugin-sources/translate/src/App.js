@@ -209,16 +209,16 @@ export default function App() {
     }
   }, []);
 
+  const onClickCopy = (event) => {
+    // setSelectedItems(StudioAPI.getSelectedItems());
+    // setOpen(true)
+  };
+
   return (
     <ThemeProvider theme={customTheme}>
-      <li className="acn-link" onClick={() => {
-        setSelectedItems(StudioAPI.getSelectedItems());
-        setOpen(true)
-      }}>
-        <StyledPopupButton className="ItemTranslate cursor">
-          Copy
-        </StyledPopupButton>
-      </li>
+      <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+        Copy
+      </StyledPopupButton>
       <Dialog
         open={open}
         fullWidth

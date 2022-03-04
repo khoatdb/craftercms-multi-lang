@@ -33593,8 +33593,8 @@ function App() {
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedItems = _useState6[0],
-      setSelectedItems = _useState6[1];
+      selectedItems = _useState6[0];
+      _useState6[1];
 
   var _useState7 = useState(null),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -33741,17 +33741,17 @@ function App() {
       copyDestSub.unsubscribe();
     };
   }, []);
+
+  var onClickCopy = function onClickCopy(event) {// setSelectedItems(StudioAPI.getSelectedItems());
+    // setOpen(true)
+  };
+
   return /*#__PURE__*/React$1.createElement(ThemeProvider, {
     theme: customTheme
-  }, /*#__PURE__*/React$1.createElement("li", {
-    className: "acn-link",
-    onClick: function onClick() {
-      setSelectedItems(StudioAPI.getSelectedItems());
-      setOpen(true);
-    }
   }, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
-    className: "ItemTranslate cursor"
-  }, "Copy")), /*#__PURE__*/React$1.createElement(Dialog$1, {
+    className: "ItemTranslate cursor",
+    onClick: onClickCopy
+  }, "Copy"), /*#__PURE__*/React$1.createElement(Dialog$1, {
     open: open,
     fullWidth: true,
     maxWidth: "lg",
