@@ -31,7 +31,14 @@ import 'regenerator-runtime/runtime';
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import App from './App';
+// import App from './App';
+import React from 'react';
+
+function App() {
+  return (
+    <h1>this is a test</h1>
+  )
+}
 
 const plugin = {
   id: 'org.craftercms.plugin',
