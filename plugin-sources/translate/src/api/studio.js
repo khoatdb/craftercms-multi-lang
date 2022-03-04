@@ -23,6 +23,7 @@ const API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.jso
 const API_CLIPBOARD_PASTE = '/studio/api/1/services/api/1/clipboard/paste-item.json';
 const API_CREATE_FOLDER = '/studio/api/1/services/api/1/content/create-folder.json';
 const API_RENAME_FOLDER = '/studio/api/1/services/api/1/content/rename-folder.json';
+const API_CONTENT_PASTE = '/studio/api/2/content/paste';
 
 const StudioAPI = {
   origin() {
@@ -117,6 +118,22 @@ const StudioAPI = {
   },
   async getItem(path) {
     const res = await HttpHelper.get(`${StudioAPI.origin()}${API_GET_ITEM}?site=${StudioAPI.siteId()}&path=${path}&populateDependencies=false`);
+
+    if (res.status === 200) {
+      return res.response;
+    }
+
+    return null;
+  },
+  async copyItem(path, destinationPath) {
+    const res = await HttpHelper.post(`${StudioAPI.origin()}${API_CONTENT_PASTE}`, {
+      siteId: StudioAPI.siteId(),
+      operation: 'COPY',
+      targetPath: destinationPath,
+      item: {
+        path,
+      }
+    });
 
     if (res.status === 200) {
       return res.response;

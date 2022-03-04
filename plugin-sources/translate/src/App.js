@@ -161,20 +161,12 @@ export default function App() {
     setIsProcessing(true);
     const paths = selectedItems.map(item => item.path);
     for (let i =0; i < paths.length; i += 1) {
-      if (await StudioAPI.clipboardCopy(paths[i])) {
-        const pastePath = await StudioAPI.clipboardPaste(desPath);
-        if (!pastePath) {
-          setIsProcessing(false);
-          setAlert({
-            open: true,
-            severity: 'error',
-            message: `There is an error while copying file: ${paths[i]}`,
-          });
-        } else {
-          // Open edit form if there is only 1 item
-          if (shouldOpenEditForm && paths.length === 1) {
-            StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
-          }
+      const path = paths[i];
+      const destinationPath = desPath;
+      if (await StudioAPI.copyItem(path, destinationPath)) {
+        // Open edit form if there is only 1 item
+        if (shouldOpenEditForm && paths.length === 1) {
+          StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
         }
       } else {
         setIsProcessing(false);

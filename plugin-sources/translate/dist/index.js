@@ -32680,6 +32680,7 @@ var API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.json'
 var API_CLIPBOARD_PASTE = '/studio/api/1/services/api/1/clipboard/paste-item.json';
 var API_CREATE_FOLDER = '/studio/api/1/services/api/1/content/create-folder.json';
 var API_RENAME_FOLDER = '/studio/api/1/services/api/1/content/rename-folder.json';
+var API_CONTENT_PASTE = '/studio/api/2/content/paste';
 var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
@@ -32825,35 +32826,37 @@ var StudioAPI = {
       }, _callee2);
     }))();
   },
-  clipboardCopy: function clipboardCopy(path) {
+  copyItem: function copyItem(path, destinationPath) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var body, res;
+      var res;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              body = {
-                item: [{
-                  uri: path
-                }]
-              };
-              _context3.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_COPY, "?site=").concat(StudioAPI.siteId()), body);
+              _context3.next = 2;
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CONTENT_PASTE), {
+                siteId: StudioAPI.siteId(),
+                operation: 'COPY',
+                targetPath: destinationPath,
+                item: {
+                  path: path
+                }
+              });
 
-            case 3:
+            case 2:
               res = _context3.sent;
 
               if (!(res.status === 200)) {
-                _context3.next = 6;
+                _context3.next = 5;
                 break;
               }
 
-              return _context3.abrupt("return", true);
+              return _context3.abrupt("return", res.response);
+
+            case 5:
+              return _context3.abrupt("return", null);
 
             case 6:
-              return _context3.abrupt("return", false);
-
-            case 7:
             case "end":
               return _context3.stop();
           }
@@ -32861,32 +32864,35 @@ var StudioAPI = {
       }, _callee3);
     }))();
   },
-  clipboardPaste: function clipboardPaste(parentPath) {
+  clipboardCopy: function clipboardCopy(path) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-      var res, data, filePath;
+      var body, res;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
-              return HttpHelper.get("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_PASTE, "?site=").concat(StudioAPI.siteId(), "&parentPath=").concat(parentPath));
+              body = {
+                item: [{
+                  uri: path
+                }]
+              };
+              _context4.next = 3;
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_COPY, "?site=").concat(StudioAPI.siteId()), body);
 
-            case 2:
+            case 3:
               res = _context4.sent;
 
               if (!(res.status === 200)) {
-                _context4.next = 7;
+                _context4.next = 6;
                 break;
               }
 
-              data = res.response;
-              filePath = data.status[0];
-              return _context4.abrupt("return", filePath);
+              return _context4.abrupt("return", true);
+
+            case 6:
+              return _context4.abrupt("return", false);
 
             case 7:
-              return _context4.abrupt("return", null);
-
-            case 8:
             case "end":
               return _context4.stop();
           }
@@ -32894,31 +32900,32 @@ var StudioAPI = {
       }, _callee4);
     }))();
   },
-  createFolder: function createFolder(path, name) {
+  clipboardPaste: function clipboardPaste(parentPath) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var body, res;
+      var res, data, filePath;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              body = '';
-              _context5.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CREATE_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
+              _context5.next = 2;
+              return HttpHelper.get("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_PASTE, "?site=").concat(StudioAPI.siteId(), "&parentPath=").concat(parentPath));
 
-            case 3:
+            case 2:
               res = _context5.sent;
 
               if (!(res.status === 200)) {
-                _context5.next = 6;
+                _context5.next = 7;
                 break;
               }
 
-              return _context5.abrupt("return", res.response);
-
-            case 6:
-              return _context5.abrupt("return", false);
+              data = res.response;
+              filePath = data.status[0];
+              return _context5.abrupt("return", filePath);
 
             case 7:
+              return _context5.abrupt("return", null);
+
+            case 8:
             case "end":
               return _context5.stop();
           }
@@ -32926,7 +32933,7 @@ var StudioAPI = {
       }, _callee5);
     }))();
   },
-  renameFolder: function renameFolder(path, name) {
+  createFolder: function createFolder(path, name) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
       var body, res;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -32935,7 +32942,7 @@ var StudioAPI = {
             case 0:
               body = '';
               _context6.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_RENAME_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CREATE_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
 
             case 3:
               res = _context6.sent;
@@ -32956,6 +32963,38 @@ var StudioAPI = {
           }
         }
       }, _callee6);
+    }))();
+  },
+  renameFolder: function renameFolder(path, name) {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+      var body, res;
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              body = '';
+              _context7.next = 3;
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_RENAME_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
+
+            case 3:
+              res = _context7.sent;
+
+              if (!(res.status === 200)) {
+                _context7.next = 6;
+                break;
+              }
+
+              return _context7.abrupt("return", res.response);
+
+            case 6:
+              return _context7.abrupt("return", false);
+
+            case 7:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
     }))();
   }
 };
@@ -33620,7 +33659,7 @@ function App() {
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {
-      var selectedItems, paths, i, pastePath;
+      var selectedItems, paths, i, path, destinationPath;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -33644,43 +33683,30 @@ function App() {
 
             case 7:
               if (!(i < paths.length)) {
-                _context.next = 22;
+                _context.next = 21;
                 break;
               }
 
-              _context.next = 10;
-              return StudioAPI.clipboardCopy(paths[i]);
+              path = paths[i];
+              destinationPath = desPath;
+              _context.next = 12;
+              return StudioAPI.copyItem(path, destinationPath);
 
-            case 10:
+            case 12:
               if (!_context.sent) {
-                _context.next = 17;
+                _context.next = 16;
                 break;
               }
 
-              _context.next = 13;
-              return StudioAPI.clipboardPaste(desPath);
-
-            case 13:
-              pastePath = _context.sent;
-
-              if (!pastePath) {
-                setIsProcessing(false);
-                setAlert({
-                  open: true,
-                  severity: 'error',
-                  message: "There is an error while copying file: ".concat(paths[i])
-                });
-              } else {
-                // Open edit form if there is only 1 item
-                if (shouldOpenEditForm && paths.length === 1) {
-                  StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
-                }
+              // Open edit form if there is only 1 item
+              if (shouldOpenEditForm && paths.length === 1) {
+                StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
               }
 
-              _context.next = 19;
+              _context.next = 18;
               break;
 
-            case 17:
+            case 16:
               setIsProcessing(false);
               return _context.abrupt("return", setAlert({
                 open: true,
@@ -33688,12 +33714,12 @@ function App() {
                 message: "There is an error while copying file: ".concat(paths[i])
               }));
 
-            case 19:
+            case 18:
               i += 1;
               _context.next = 7;
               break;
 
-            case 22:
+            case 21:
               setAlert({
                 open: true,
                 severity: 'success',
@@ -33701,7 +33727,7 @@ function App() {
               });
               setIsProcessing(false);
 
-            case 24:
+            case 23:
             case "end":
               return _context.stop();
           }
