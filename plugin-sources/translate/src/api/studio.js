@@ -39,23 +39,64 @@ const StudioAPI = {
     return CookieHelper.get('crafterSite');
   },
   getSelectedItems: function() {
-    return CStudioAuthoring.SelectedContent.getSelectedContent().map(item => ({
-      name: item.internalName,
-      path: item.uri,
-      contentType: item.contentType,
-    }));
+    const selectedPath = craftercms.getStore().getState().preview.guest.path;
+    if (!selectedPath) return [];
+
+    const item = craftercms.getStore().getState().content.itemsByPath[craftercms.getStore().getState().preview.guest.path];
+    if (!item) return [];
+
+    return [{
+      name: item.label,
+      path: item.path,
+      contentType: item.contentTypeId,
+    }];
   },
   openEditForm: function(contentType, path) {
-    return CStudioAuthoring.Operations.editContent(
-      contentType,
-      CStudioAuthoringContext.site,
-      path,
-      '',
-      path,
-      false,
-      null,
-      new Array()
-    );
+    const site = CrafterCMSNext.system.store.getState().sites.active;
+    const authoringBase = CrafterCMSNext.system.store.getState().env.authoringBase;
+    const eventIdSuccess = 'editDialogSuccess';
+    const eventIdDismissed = 'editDialogDismissed';
+
+    return CrafterCMSNext.system.store.dispatch({
+      type: 'SHOW_EDIT_DIALOG',
+      payload: {
+        site: site,
+        path: path,
+        type: 'form',
+        authoringBase,
+        readonly: false,  // TODO: make this configurable
+        isHidden: !!message.embeddedItemId,
+        // TODO: ICE groups for embedded comments are not currently supported
+        ...(message.embeddedItemId ? { modelId: message.embeddedItemId } : { iceGroupId: message.iceId }),
+        onSaveSuccess: {
+          type: 'BATCH_ACTIONS',
+          payload: [
+            {
+              type: 'DISPATCH_DOM_EVENT',
+              payload: { id: eventIdSuccess }
+            },
+            {
+              type: 'SHOW_EDIT_ITEM_SUCCESS_NOTIFICATION'
+            },
+            {
+              type: 'CLOSE_EDIT_DIALOG'
+            }
+          ]
+        },
+        onCancel: {
+          type: 'BATCH_ACTIONS',
+          payload: [
+            {
+              type: 'CLOSE_EDIT_DIALOG'
+            },
+            {
+              type: 'DISPATCH_DOM_EVENT',
+              payload: { id: eventIdDismissed }
+            }
+          ]
+        }
+      }
+    });
   },
   async getChildrenPaths(path) {
     const res = await fetch(`${StudioAPI.origin()}${API_GET_ITEM_TREE}?site=${StudioAPI.siteId()}&path=${path}&depth=1`, {
