@@ -33592,25 +33592,22 @@ function App() {
       alert = _useState4[0],
       setAlert = _useState4[1];
 
-  var _useState5 = useState([]),
+  var _useState5 = useState(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedItems = _useState6[0];
+      rootDir = _useState6[0];
       _useState6[1];
 
-  var _useState7 = useState(null),
+  var _useState7 = useState(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      rootDir = _useState8[0];
-      _useState8[1];
+      desPath = _useState8[0],
+      setDesPath = _useState8[1];
 
-  var _useState9 = useState(''),
+  var _useState9 = useState(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      desPath = _useState10[0],
-      setDesPath = _useState10[1];
+      isProcessing = _useState10[0],
+      setIsProcessing = _useState10[1];
 
-  var _useState11 = useState(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isProcessing = _useState12[0],
-      setIsProcessing = _useState12[1];
+  var selectedItems = StudioAPI.getSelectedItems();
 
   var resetState = function resetState() {
     setDesPath('');
@@ -33744,8 +33741,6 @@ function App() {
   }, []);
 
   var onClickCopy = function onClickCopy(event) {
-    var items = StudioAPI.getSelectedItems();
-    console.log(items);
     setOpen(true);
   };
 
