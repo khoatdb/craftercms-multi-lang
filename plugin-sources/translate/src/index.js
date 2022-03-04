@@ -34,15 +34,15 @@ import 'regenerator-runtime/runtime';
 import App from './App';
 
 const plugin = {
-  id: 'org.pn.plugin.bulkedit',
-  name: 'Bulk Edit Plugin',
-  description: 'A plugin to do bulk edit',
+  id: 'org.craftercms.plugin',
+  name: 'Translate Plugin',
+  description: 'A plugin to do translations',
   author: 'Phil Nguyen',
   logo: null,
   locales: {},
   apps: [],
   widgets: {
-    'org.pn.plugin.bulkedit.components.reactComponent': App,
+    'org.craftercms.translatePlugin.components.reactComponent': App,
   },
   scripts: [],
   stylesheets: [],
