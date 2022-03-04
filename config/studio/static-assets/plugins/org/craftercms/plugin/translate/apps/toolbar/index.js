@@ -33163,7 +33163,7 @@ function RenameFolderDialog(_ref) {
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-var copyDestSub = new Subject('');
+var copyDestSub = new Subject();
 
 function FileSystemNavigator(_ref) {
   _ref.selectedItems;
@@ -33723,7 +33723,8 @@ function App() {
     copyDestSub.subscribe(function (path) {
       setDesPath(path);
     });
-    return function () {//copyDestSub.unsubscribe();
+    return function () {
+      copyDestSub.unsubscribe();
     };
   }, []);
 
