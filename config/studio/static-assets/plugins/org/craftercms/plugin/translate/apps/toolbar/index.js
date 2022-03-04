@@ -32727,7 +32727,7 @@ var StudioAPI = {
         authoringBase: authoringBase,
         readonly: false,
         // TODO: make this configurable
-        isHidden: !!message.embeddedItemId
+        isHidden: false
       }, message.embeddedItemId ? {
         modelId: message.embeddedItemId
       } : {

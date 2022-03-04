@@ -72,7 +72,7 @@ const StudioAPI = {
         type: 'form',
         authoringBase,
         readonly: false,  // TODO: make this configurable
-        isHidden: !!message.embeddedItemId,
+        isHidden: false,
         // TODO: ICE groups for embedded comments are not currently supported
         ...(message.embeddedItemId ? { modelId: message.embeddedItemId } : { iceGroupId: message.iceId }),
         onSaveSuccess: {
