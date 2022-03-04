@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -76,7 +76,7 @@ const customTheme = createTheme({
 
 };
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -123,10 +123,11 @@ const StyledPopupButton = styled('a')(({ theme }) => ({
 export default function App() {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({});
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [rootDir, setRootDir] = useState(null);
   const [desPath, setDesPath] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const selectedItems = StudioAPI.getSelectedItems();
+  const rootDir = getRootDir(selectedItems);
 
   const resetState = () => {
     setDesPath('');
@@ -160,20 +161,15 @@ export default function App() {
     setIsProcessing(true);
     const paths = selectedItems.map(item => item.path);
     for (let i =0; i < paths.length; i += 1) {
-      if (await StudioAPI.clipboardCopy(paths[i])) {
-        const pastePath = await StudioAPI.clipboardPaste(desPath);
-        if (!pastePath) {
-          setIsProcessing(false);
-          setAlert({
-            open: true,
-            severity: 'error',
-            message: `There is an error while copying file: ${paths[i]}`,
-          });
-        } else {
-          // Open edit form if there is only 1 item
-          if (shouldOpenEditForm && paths.length === 1) {
-            StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
-          }
+      const path = paths[i];
+      const destinationPath = desPath;
+      const res = await StudioAPI.copyItem(path, destinationPath)
+      if (res) {
+        console.log(res);
+        const pastePath = res.items[0];
+        // Open edit form if there is only 1 item
+        if (shouldOpenEditForm && paths.length === 1) {
+          StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
         }
       } else {
         setIsProcessing(false);
@@ -199,23 +195,7 @@ export default function App() {
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    const handleContentMenuChanged = () => {
-      const items = StudioAPI.getSelectedItems();
-      setSelectedItems(items);
-      setRootDir(getRootDir(items));
-    }
-
-    CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-    CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-
-    return () => {
-      CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-      CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    }
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     copyDestSub.subscribe((path) => {
       setDesPath(path);
     });
@@ -225,16 +205,15 @@ export default function App() {
     }
   }, []);
 
+  const onClickCopy = (event) => {
+    setOpen(true)
+  };
+
   return (
     <ThemeProvider theme={customTheme}>
-      {selectedItems.length > 0 && (
-        <li className="acn-link" onClick={() => setOpen(true)}>
-          <StyledPopupButton className="ItemTranslate cursor">
-            Copy
-          </StyledPopupButton>
-          <img id="itemtranslate-loading" src="/studio/static-assets/themes/cstudioTheme/images/treeview-loading.gif" />
-        </li>
-      )}
+      <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+        Copy
+      </StyledPopupButton>
       <Dialog
         open={open}
         fullWidth
