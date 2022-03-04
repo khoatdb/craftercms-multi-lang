@@ -329,6 +329,8 @@
 			</leftSection>
 			<middleSection>
 				<widgets>
+					<widget id="craftercms.components.PreviewAddressBar"/>
+    			    
 					<widget id="org.craftercms.translatePlugin.components.reactComponent">
 					    <plugin id="org.craftercms.plugin.translate"
 					        type="apps"
