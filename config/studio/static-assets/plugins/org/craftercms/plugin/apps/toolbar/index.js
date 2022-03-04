@@ -33593,7 +33593,7 @@ function App() {
       alert = _useState4[0],
       setAlert = _useState4[1];
 
-  var _useState5 = useState([]),
+  var _useState5 = useState(StudioAPI.getSelectedItems()),
       _useState6 = _slicedToArray(_useState5, 2),
       selectedItems = _useState6[0];
       _useState6[1];
