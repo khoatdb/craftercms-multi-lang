@@ -123,10 +123,11 @@ const StyledPopupButton = styled('a')(({ theme }) => ({
 export default function App() {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({});
-  const [selectedItems, setSelectedItems] = useState([]);
   const [rootDir, setRootDir] = useState(null);
   const [desPath, setDesPath] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const selectedItems = StudioAPI.getSelectedItems();
 
   const resetState = () => {
     setDesPath('');
@@ -210,8 +211,6 @@ export default function App() {
   }, []);
 
   const onClickCopy = (event) => {
-    const items = StudioAPI.getSelectedItems();
-    console.log(items);
     setOpen(true)
   };
 
