@@ -32670,8 +32670,10 @@ var StudioAPI = {
     }
 
     var selectedPath = craftercms.getStore().getState().preview.guest.path;
+    console.log(selectedPath);
     if (!selectedPath) return [];
-    var item = craftercms.getStore().getState().content.itemsByPath[craftercms.getStore().getState().preview.guest.path];
+    var item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
+    console.log(item);
     if (!item) return [];
     return [{
       name: item.label,

@@ -43,9 +43,11 @@ const StudioAPI = {
       return [];
     }
     const selectedPath = craftercms.getStore().getState().preview.guest.path;
+    console.log(selectedPath);
     if (!selectedPath) return [];
 
-    const item = craftercms.getStore().getState().content.itemsByPath[craftercms.getStore().getState().preview.guest.path];
+    const item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
+    console.log(item);
     if (!item) return [];
 
     return [{
