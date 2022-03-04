@@ -37,7 +37,7 @@ const plugin = {
   id: 'org.craftercms.plugin',
   name: 'Translate Plugin',
   description: 'A plugin to do translations',
-  author: 'Phil Nguyen',
+  author: 'CrafterCMS',
   logo: null,
   locales: {},
   apps: [],
