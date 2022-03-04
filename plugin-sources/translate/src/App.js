@@ -148,8 +148,6 @@ export default function App() {
      }));
   }
 
-  console.log(StudioAPI.getSelectedItems());
-
   const handleCopy = async (event, shouldOpenEditForm) => {
     event.preventDefault();
 
@@ -212,6 +210,9 @@ export default function App() {
   }, []);
 
   const onClickCopy = (event) => {
+    const items = StudioAPI.getSelectedItems();
+    console.log(items);
+    setSelectedItems(items);
     setOpen(true)
   };
 
