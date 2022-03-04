@@ -39,7 +39,7 @@ function commitMessage(tpl, file) {
 }
 
 function rollupPluginCommit() {
-  const target = '../static-assets/plugins/org/craftercms/plugin/apps/toolbar/index.js';
+  const target = '../../config/studio/static-assets/plugins/org/craftercms/plugin/apps/toolbar/index.js';
   const message = 'Updates to {file} @ {date} {time}';
   return {
     name: 'rollup-plugin-commit',
@@ -96,7 +96,7 @@ export default {
     }),
     commonjs(),
     copy({
-      targets: [{ src: 'dist/*', dest: '../static-assets/plugins/org/craftercms/plugin/apps/toolbar' }],
+      targets: [{ src: 'dist/*', dest: '../../config/studio/static-assets/plugins/org/craftercms/plugin/apps/toolbar/' }],
       hook: 'writeBundle'
     }),
     rollupPluginCommit()
