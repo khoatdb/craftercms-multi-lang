@@ -33595,8 +33595,8 @@ function App() {
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedItems = _useState6[0],
-      setSelectedItems = _useState6[1];
+      selectedItems = _useState6[0];
+      _useState6[1];
 
   var _useState7 = useState(null),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -33745,7 +33745,6 @@ function App() {
   }, []);
 
   var onClickCopy = function onClickCopy(event) {
-    setSelectedItems(StudioAPI.getSelectedItems());
     setOpen(true);
   };
 
