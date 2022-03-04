@@ -107,10 +107,8 @@ const StudioAPI = {
   async getChildrenPaths(path) {
     const res = await HttpHelper.get(`${StudioAPI.origin()}${API_GET_ITEM_TREE}?site=${StudioAPI.siteId()}&path=${path}&depth=1`);
 
-    console.log(res);
     if (res.status === 200) {
-      const data = await res.json();
-      return data.item.children.filter(child => child.path !== path).map(child => {
+      return res.response.item.children.filter(child => child.path !== path).map(child => {
         return child.path;
       });
     }
@@ -121,25 +119,16 @@ const StudioAPI = {
     const res = await HttpHelper.get(`${StudioAPI.origin()}${API_GET_ITEM}?site=${StudioAPI.siteId()}&path=${path}&populateDependencies=false`);
 
     if (res.status === 200) {
-      const data = await res.json();
-      return data;
+      return res.response;
     }
 
     return null;
   },
   async clipboardCopy(path) {
-    const item = {
+    const body = {
       item: [{ uri: path }]
     };
-    const res = await fetch(`${StudioAPI.origin()}${API_CLIPBOARD_COPY}?site=${StudioAPI.siteId()}`, {
-      method: 'POST',
-      headers: {
-        'x-xsrf-token': StudioAPI.xsrfToken(),
-        'content-type': 'application/json; charset=UTF-8',
-      },
-      credentials: 'include',
-      body: JSON.stringify(item),
-    });
+    const res = await HttpHelper.post(`${StudioAPI.origin()}${API_CLIPBOARD_COPY}?site=${StudioAPI.siteId()}`, body);
 
     if (res.status === 200) {
       return true;
@@ -148,16 +137,10 @@ const StudioAPI = {
     return false;
   },
   async clipboardPaste(parentPath) {
-    const res = await fetch(`${StudioAPI.origin()}${API_CLIPBOARD_PASTE}?site=${StudioAPI.siteId()}&parentPath=${parentPath}`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json; charset=UTF-8',
-      },
-      credentials: 'include',
-    });
+    const res = await HttpHelper.get(`${StudioAPI.origin()}${API_CLIPBOARD_PASTE}?site=${StudioAPI.siteId()}&parentPath=${parentPath}`);
 
     if (res.status === 200) {
-      const data = await res.json();
+      const data = res.response;
       const filePath = data.status[0];
       return filePath;
     }
@@ -165,37 +148,21 @@ const StudioAPI = {
     return null;
   },
   async createFolder(path, name) {
-    const res = await fetch(`${StudioAPI.origin()}${API_CREATE_FOLDER}?site=${StudioAPI.siteId()}&path=${path}&name=${name}`, {
-      method: 'POST',
-      headers: {
-        'x-xsrf-token': StudioAPI.xsrfToken(),
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      },
-      credentials: 'include',
-      body: '',
-    });
+    const body = '';
+    const res = await HttpHelper.post(`${StudioAPI.origin()}${API_CREATE_FOLDER}?site=${StudioAPI.siteId()}&path=${path}&name=${name}`, body);
 
     if (res.status === 200) {
-      const data = await res.json();
-      return data;
+      return res.response;
     }
 
     return false;
   },
   async renameFolder(path, name) {
-    const res = await fetch(`${StudioAPI.origin()}${API_RENAME_FOLDER}?site=${StudioAPI.siteId()}&path=${path}&name=${name}`, {
-      method: 'POST',
-      headers: {
-        'x-xsrf-token': StudioAPI.xsrfToken(),
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      },
-      credentials: 'include',
-      body: '',
-    });
+    const body = '';
+    const res = await HttpHelper.post(`${StudioAPI.origin()}${API_RENAME_FOLDER}?site=${StudioAPI.siteId()}&path=${path}&name=${name}`, body);
 
     if (res.status === 200) {
-      const data = await res.json();
-      return data;
+      return res.response;
     }
 
     return false;
