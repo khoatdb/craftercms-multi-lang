@@ -328,18 +328,7 @@
 				</widgets>
 			</leftSection>
 			<middleSection>
-				<!--/config/studio/static-assets/plugins/translation/apps/toolbar/index.js-->
 				<widgets>
-					<widget id="craftercms.components.PreviewAddressBar"/>
-					<!--
-				    <widget id="translation">
-				    	<plugin id="translation"
-				                site="{site}"
-				                type="apps"
-				                name="toolbar"
-				                file="index.js"/>
-				            </widget>
-					-->
 					<widget id="org.craftercms.translatePlugin.components.reactComponent">
 					    <plugin id="org.craftercms.plugin.translate"
 					        type="apps"
