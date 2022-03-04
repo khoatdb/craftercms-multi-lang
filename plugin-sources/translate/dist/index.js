@@ -32642,6 +32642,38 @@ var CookieHelper = {
   }
 };
 
+/*
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var HttpHelper = {
+  get: function get(url) {
+    return new Promise(function (resolve, reject) {
+      CrafterCMSNext.util.ajax.get(url).subscribe(function (response) {
+        resolve(response);
+      });
+    });
+  },
+  post: function post(url, body, headers) {
+    return new Promise(function (resolve, reject) {
+      CrafterCMSNext.util.ajax.post(url, body, headers).subscribe(function (response) {
+        resolve(response);
+      });
+    });
+  }
+};
+
 var API_GET_ITEM_TREE = '/studio/api/1/services/api/1/content/get-items-tree.json';
 var API_GET_ITEM = '/studio/api/1/services/api/1/content/get-item.json';
 var API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.json';
@@ -32735,26 +32767,21 @@ var StudioAPI = {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("".concat(StudioAPI.origin()).concat(API_GET_ITEM_TREE, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&depth=1"), {
-                method: 'GET',
-                headers: {
-                  'content-type': 'application/json; charset=UTF-8'
-                },
-                credentials: 'include'
-              });
+              return HttpHelper.get("".concat(StudioAPI.origin()).concat(API_GET_ITEM_TREE, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&depth=1"));
 
             case 2:
               res = _context.sent;
+              console.log(res);
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 9;
                 break;
               }
 
-              _context.next = 6;
+              _context.next = 7;
               return res.json();
 
-            case 6:
+            case 7:
               data = _context.sent;
               return _context.abrupt("return", data.item.children.filter(function (child) {
                 return child.path !== path;
@@ -32762,10 +32789,10 @@ var StudioAPI = {
                 return child.path;
               }));
 
-            case 8:
+            case 9:
               return _context.abrupt("return", []);
 
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -32781,13 +32808,7 @@ var StudioAPI = {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("".concat(StudioAPI.origin()).concat(API_GET_ITEM, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&populateDependencies=false"), {
-                method: 'GET',
-                headers: {
-                  'content-type': 'application/json; charset=UTF-8'
-                },
-                credentials: 'include'
-              });
+              return HttpHelper.get("".concat(StudioAPI.origin()).concat(API_GET_ITEM, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&populateDependencies=false"));
 
             case 2:
               res = _context2.sent;

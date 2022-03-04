@@ -15,6 +15,7 @@
  */
 
 import CookieHelper from '../helpers/cookie';
+import HttpHelper from '../helpers/http';
 
 const API_GET_ITEM_TREE = '/studio/api/1/services/api/1/content/get-items-tree.json';
 const API_GET_ITEM = '/studio/api/1/services/api/1/content/get-item.json';
@@ -104,14 +105,9 @@ const StudioAPI = {
     });
   },
   async getChildrenPaths(path) {
-    const res = await fetch(`${StudioAPI.origin()}${API_GET_ITEM_TREE}?site=${StudioAPI.siteId()}&path=${path}&depth=1`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json; charset=UTF-8',
-      },
-      credentials: 'include',
-    });
+    const res = await HttpHelper.get(`${StudioAPI.origin()}${API_GET_ITEM_TREE}?site=${StudioAPI.siteId()}&path=${path}&depth=1`);
 
+    console.log(res);
     if (res.status === 200) {
       const data = await res.json();
       return data.item.children.filter(child => child.path !== path).map(child => {
@@ -122,13 +118,7 @@ const StudioAPI = {
     return [];
   },
   async getItem(path) {
-    const res = await fetch(`${StudioAPI.origin()}${API_GET_ITEM}?site=${StudioAPI.siteId()}&path=${path}&populateDependencies=false`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json; charset=UTF-8',
-      },
-      credentials: 'include',
-    });
+    const res = await HttpHelper.get(`${StudioAPI.origin()}${API_GET_ITEM}?site=${StudioAPI.siteId()}&path=${path}&populateDependencies=false`);
 
     if (res.status === 200) {
       const data = await res.json();
