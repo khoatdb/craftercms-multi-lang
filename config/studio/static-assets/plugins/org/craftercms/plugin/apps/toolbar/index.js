@@ -33730,14 +33730,6 @@ function App() {
   };
 
   React$1.useEffect(function () {
-    // CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-    // return () => {
-    //   CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-    //   CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    // }
-
-  }, []);
-  React$1.useEffect(function () {
     copyDestSub.subscribe(function (path) {
       setDesPath(path);
     });

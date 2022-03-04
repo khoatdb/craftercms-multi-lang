@@ -200,22 +200,6 @@ export default function App() {
   };
 
   React.useEffect(() => {
-    const handleContentMenuChanged = () => {
-      const items = StudioAPI.getSelectedItems();
-      setSelectedItems(items);
-      setRootDir(getRootDir(items));
-    }
-
-    // CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-    // CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-
-    // return () => {
-    //   CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-    //   CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    // }
-  }, []);
-
-  React.useEffect(() => {
     copyDestSub.subscribe((path) => {
       setDesPath(path);
     });
