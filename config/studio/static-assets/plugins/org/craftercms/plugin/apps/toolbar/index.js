@@ -32665,6 +32665,10 @@ var StudioAPI = {
     return CookieHelper.get('crafterSite');
   },
   getSelectedItems: function getSelectedItems() {
+    if (!craftercms.getStore().getState().preview.guest) {
+      return [];
+    }
+
     var selectedPath = craftercms.getStore().getState().preview.guest.path;
     if (!selectedPath) return [];
     var item = craftercms.getStore().getState().content.itemsByPath[craftercms.getStore().getState().preview.guest.path];

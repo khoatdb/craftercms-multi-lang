@@ -39,6 +39,9 @@ const StudioAPI = {
     return CookieHelper.get('crafterSite');
   },
   getSelectedItems: function() {
+    if (!craftercms.getStore().getState().preview.guest) {
+      return [];
+    }
     const selectedPath = craftercms.getStore().getState().preview.guest.path;
     if (!selectedPath) return [];
 
