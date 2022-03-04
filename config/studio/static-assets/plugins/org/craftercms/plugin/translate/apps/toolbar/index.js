@@ -33659,7 +33659,7 @@ function App() {
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {
-      var selectedItems, paths, i, path, destinationPath;
+      var selectedItems, paths, i, path, destinationPath, res, pastePath;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -33683,7 +33683,7 @@ function App() {
 
             case 7:
               if (!(i < paths.length)) {
-                _context.next = 21;
+                _context.next = 24;
                 break;
               }
 
@@ -33693,20 +33693,24 @@ function App() {
               return StudioAPI.copyItem(path, destinationPath);
 
             case 12:
-              if (!_context.sent) {
-                _context.next = 16;
+              res = _context.sent;
+
+              if (!res) {
+                _context.next = 19;
                 break;
               }
 
-              // Open edit form if there is only 1 item
+              console.log(res);
+              pastePath = res.items[0]; // Open edit form if there is only 1 item
+
               if (shouldOpenEditForm && paths.length === 1) {
                 StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
               }
 
-              _context.next = 18;
+              _context.next = 21;
               break;
 
-            case 16:
+            case 19:
               setIsProcessing(false);
               return _context.abrupt("return", setAlert({
                 open: true,
@@ -33714,12 +33718,12 @@ function App() {
                 message: "There is an error while copying file: ".concat(paths[i])
               }));
 
-            case 18:
+            case 21:
               i += 1;
               _context.next = 7;
               break;
 
-            case 21:
+            case 24:
               setAlert({
                 open: true,
                 severity: 'success',
@@ -33727,7 +33731,7 @@ function App() {
               });
               setIsProcessing(false);
 
-            case 23:
+            case 26:
             case "end":
               return _context.stop();
           }

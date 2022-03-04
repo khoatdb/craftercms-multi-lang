@@ -163,7 +163,10 @@ export default function App() {
     for (let i =0; i < paths.length; i += 1) {
       const path = paths[i];
       const destinationPath = desPath;
-      if (await StudioAPI.copyItem(path, destinationPath)) {
+      const res = await StudioAPI.copyItem(path, destinationPath)
+      if (res) {
+        console.log(res);
+        const pastePath = res.items[0];
         // Open edit form if there is only 1 item
         if (shouldOpenEditForm && paths.length === 1) {
           StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
