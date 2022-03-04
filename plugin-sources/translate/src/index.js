@@ -20,29 +20,30 @@ import App from './App';
 import { render } from 'react-dom';
 import { createElement } from 'react';
 
-/**
- * A plugin to copy selected items by copying them to an other locale location
- * This plugin add a button next to active content actions bar of Crafter 3.1.x
- * This is possible by adding an `ul` element and append next to 'activeContentActions'
- */
-CStudioAuthoring.Module.moduleLoaded('translate', {
-  initialize(config) {
-    if (config && config.params) {
-      switch (config.params.widget) {
-        case 'popup':
-          const elm = document.createElement('ul');
-          elm.setAttribute('id', 'translate-popup');
-          elm.setAttribute('class', 'nav navbar-nav');
-
-          const activeActNode = document.getElementById('activeContentActions');
-          activeActNode.parentNode.insertBefore(elm, activeActNode.nextElementSibling);
-          render(createElement(App), elm);
-          break;
-        default:
-          console.error('No widget supplied on the config. Skipping initialize request.');
+var plugin /*: PluginDescriptor */ = {
+  id: 'org.craftercms.translatePlugin',
+  name: 'Translate Plugin',
+  description: 'A plugin to copy selected items by copying them to an other locale location',
+  author: 'CrafterCMS',
+  logo: null,
+  locales: {
+      en: en,
+      es: es
+  },
+  apps: [
+      {
+          route: '/yada-yada',
+          widget: { id: 'org.craftercms.translatePlugin.components.reactComponent' }
       }
-    } else {
-      console.error('No config supplied to the sidebar plugin. Skipping initialize request.');
-    }
-  }
-});
+  ],
+  widgets: {
+      'org.craftercms.translatePlugin.components.reactComponent': App,
+  },
+  scripts: [
+  ],
+  stylesheets: [],
+  themes: []
+};
+
+export default plugin;
+export { App };
