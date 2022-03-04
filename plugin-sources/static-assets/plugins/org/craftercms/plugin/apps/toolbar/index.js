@@ -33739,7 +33739,7 @@ function App() {
   }, []);
   return /*#__PURE__*/React$1.createElement(ThemeProvider, {
     theme: customTheme
-  }, selectedItems.length > 0 && /*#__PURE__*/React$1.createElement("li", {
+  }, /*#__PURE__*/React$1.createElement("li", {
     className: "acn-link",
     onClick: function onClick() {
       return setOpen(true);

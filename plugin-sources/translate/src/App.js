@@ -211,14 +211,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      {selectedItems.length > 0 && (
-        <li className="acn-link" onClick={() => setOpen(true)}>
-          <StyledPopupButton className="ItemTranslate cursor">
-            Copy
-          </StyledPopupButton>
-          <img id="itemtranslate-loading" src="/studio/static-assets/themes/cstudioTheme/images/treeview-loading.gif" />
-        </li>
-      )}
+      <li className="acn-link" onClick={() => setOpen(true)}>
+        <StyledPopupButton className="ItemTranslate cursor">
+          Copy
+        </StyledPopupButton>
+        <img id="itemtranslate-loading" src="/studio/static-assets/themes/cstudioTheme/images/treeview-loading.gif" />
+      </li>
       <Dialog
         open={open}
         fullWidth
