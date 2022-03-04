@@ -212,7 +212,7 @@ export default function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
-        Copy
+        Translate
       </StyledPopupButton>
       <Dialog
         open={open}
@@ -222,7 +222,7 @@ export default function App() {
         aria-describedby="alert-dialog-description"
         onClose={handleClose}
       >
-        <DialogTitle id="alert-dialog-title">Copy</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
         <DialogContent>
           {selectedItems.length === 0 ?
             <NoSelectedItems /> :
