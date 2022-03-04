@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -76,7 +76,7 @@ const customTheme = createTheme({
 
 };
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -200,7 +200,7 @@ export default function App() {
     setOpen(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     copyDestSub.subscribe((path) => {
       setDesPath(path);
     });

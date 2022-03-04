@@ -1,4 +1,4 @@
-var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement, Fragment: Fragment$2, Children, isValidElement, cloneElement, useState } = craftercms.libs.React;
+var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement, Fragment: Fragment$2, Children, isValidElement, cloneElement, useState, useEffect } = craftercms.libs.React;
 var React$1 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { unstable_useEnhancedEffect, unstable_useId, useForkRef: useForkRef$1, useControlled: useControlled$1, ownerDocument: ownerDocument$1 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
@@ -33553,7 +33553,7 @@ var getRootDir = function getRootDir(items) {
   return null;
 };
 
-var Alert = /*#__PURE__*/React$1.forwardRef(function Alert(props, ref) {
+var Alert = /*#__PURE__*/forwardRef(function Alert(props, ref) {
   return /*#__PURE__*/React$1.createElement(MuiAlert, _extends$1({
     elevation: 6,
     ref: ref,
@@ -33752,7 +33752,7 @@ function App() {
     setOpen(false);
   };
 
-  React$1.useEffect(function () {
+  useEffect(function () {
     copyDestSub.subscribe(function (path) {
       setDesPath(path);
     });
