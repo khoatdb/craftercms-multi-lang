@@ -73,8 +73,6 @@ const StudioAPI = {
         authoringBase,
         readonly: false,  // TODO: make this configurable
         isHidden: false,
-        // TODO: ICE groups for embedded comments are not currently supported
-        ...(message.embeddedItemId ? { modelId: message.embeddedItemId } : { iceGroupId: message.iceId }),
         onSaveSuccess: {
           type: 'BATCH_ACTIONS',
           payload: [
