@@ -32670,16 +32670,15 @@ var StudioAPI = {
     }
 
     var selectedPath = craftercms.getStore().getState().preview.guest.path;
-    console.log(selectedPath);
     if (!selectedPath) return [];
     var item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
-    console.log(item);
     if (!item) return [];
-    return [{
+    var selectedItem = {
       name: item.label,
       path: item.path,
       contentType: item.contentTypeId
-    }];
+    };
+    return [selectedItem];
   },
   openEditForm: function openEditForm(contentType, path) {
     var site = CrafterCMSNext.system.store.getState().sites.active;
@@ -33633,7 +33632,7 @@ function App() {
     }));
   };
 
-  StudioAPI.getSelectedItems();
+  console.log(StudioAPI.getSelectedItems());
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {

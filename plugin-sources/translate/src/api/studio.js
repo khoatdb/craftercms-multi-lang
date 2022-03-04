@@ -43,18 +43,18 @@ const StudioAPI = {
       return [];
     }
     const selectedPath = craftercms.getStore().getState().preview.guest.path;
-    console.log(selectedPath);
     if (!selectedPath) return [];
 
     const item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
-    console.log(item);
     if (!item) return [];
 
-    return [{
+    const selectedItem = {
       name: item.label,
       path: item.path,
       contentType: item.contentTypeId,
-    }];
+    };
+
+    return [selectedItem];
   },
   openEditForm: function(contentType, path) {
     const site = CrafterCMSNext.system.store.getState().sites.active;

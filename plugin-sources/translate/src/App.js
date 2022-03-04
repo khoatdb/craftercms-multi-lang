@@ -148,7 +148,7 @@ export default function App() {
      }));
   }
 
-  StudioAPI.getSelectedItems();
+  console.log(StudioAPI.getSelectedItems());
 
   const handleCopy = async (event, shouldOpenEditForm) => {
     event.preventDefault();
