@@ -210,8 +210,8 @@ export default function App() {
   }, []);
 
   const onClickCopy = (event) => {
-    // setSelectedItems(StudioAPI.getSelectedItems());
-    // setOpen(true)
+    setSelectedItems(StudioAPI.getSelectedItems());
+    setOpen(true)
   };
 
   return (
