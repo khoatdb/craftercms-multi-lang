@@ -33501,8 +33501,6 @@ function FileSystemNavigator(_ref) {
   }));
 }
 
-var DEFAULT_WEBSITE_PATH = '/site/website';
-var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
 /**
  * Theme style to align with Crafter CMS 3.1.x
@@ -33524,29 +33522,6 @@ var customTheme = createTheme({
     }
   }
 });
-/**
- * Get root directory
- * If all /site/website => root directory
- * If all /site/components => root directory
- * Default: /site
- * @returns root directory
- */
-
-var getRootDir = function getRootDir(items) {
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_WEBSITE_PATH);
-  })) {
-    return DEFAULT_WEBSITE_PATH;
-  }
-
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_COMPONENT_PATH);
-  })) {
-    return DEFAULT_COMPONENT_PATH;
-  }
-
-  return null;
-};
 
 var Alert = /*#__PURE__*/React$1.forwardRef(function Alert(props, ref) {
   return /*#__PURE__*/React$1.createElement(MuiAlert, _extends$1({
@@ -33614,13 +33589,13 @@ function App() {
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedItems = _useState6[0],
-      setSelectedItems = _useState6[1];
+      selectedItems = _useState6[0];
+      _useState6[1];
 
   var _useState7 = useState(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      rootDir = _useState8[0],
-      setRootDir = _useState8[1];
+      rootDir = _useState8[0];
+      _useState8[1];
 
   var _useState9 = useState(''),
       _useState10 = _slicedToArray(_useState9, 2),
@@ -33755,22 +33730,12 @@ function App() {
   };
 
   React$1.useEffect(function () {
-    var handleContentMenuChanged = function handleContentMenuChanged() {
-      var items = StudioAPI.getSelectedItems();
-      setSelectedItems(items);
-      setRootDir(getRootDir(items));
-    };
+    // CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
+    // return () => {
+    //   CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
+    //   CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
+    // }
 
-    CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, {
-      subscriber: 'translate-plugin'
-    });
-    CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, {
-      subscriber: 'translate-plugin'
-    });
-    return function () {
-      CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-      CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    };
   }, []);
   React$1.useEffect(function () {
     copyDestSub.subscribe(function (path) {

@@ -206,13 +206,13 @@ export default function App() {
       setRootDir(getRootDir(items));
     }
 
-    CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
-    CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
+    // CStudioAuthoring.Events.contentSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
+    // CStudioAuthoring.Events.contentUnSelected.subscribe(handleContentMenuChanged, { subscriber: 'translate-plugin' });
 
-    return () => {
-      CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
-      CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
-    }
+    // return () => {
+    //   CStudioAuthoring.Events.contentSelected.unsubscribe(handleContentMenuChanged);
+    //   CStudioAuthoring.Events.contentUnSelected.unsubscribe(handleContentMenuChanged);
+    // }
   }, []);
 
   React.useEffect(() => {
