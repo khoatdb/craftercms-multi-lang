@@ -33736,7 +33736,7 @@ function App() {
   }, /*#__PURE__*/React.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
-  }, "Copy"), /*#__PURE__*/React.createElement(Dialog$1, {
+  }, "Translate"), /*#__PURE__*/React.createElement(Dialog$1, {
     open: open,
     fullWidth: true,
     maxWidth: "lg",
@@ -33745,7 +33745,7 @@ function App() {
     onClose: handleClose
   }, /*#__PURE__*/React.createElement(DialogTitle$1, {
     id: "alert-dialog-title"
-  }, "Copy"), /*#__PURE__*/React.createElement(DialogContent$1, null, selectedItems.length === 0 ? /*#__PURE__*/React.createElement(NoSelectedItems, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectedItem, {
+  }, "Translate"), /*#__PURE__*/React.createElement(DialogContent$1, null, selectedItems.length === 0 ? /*#__PURE__*/React.createElement(NoSelectedItems, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectedItem, {
     selectedItems: selectedItems
   }), !!rootDir ? /*#__PURE__*/React.createElement(FileSystemNavigator, {
     selectedItems: selectedItems,
