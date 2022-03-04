@@ -123,7 +123,7 @@ const StyledPopupButton = styled('a')(({ theme }) => ({
 export default function App() {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({});
-  const [selectedItems, setSelectedItems] = useState(StudioAPI.getSelectedItems());
+  const [selectedItems, setSelectedItems] = useState([]);
   const [rootDir, setRootDir] = useState(null);
   const [desPath, setDesPath] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -147,6 +147,8 @@ export default function App() {
       message: alert.message,
      }));
   }
+
+  StudioAPI.getSelectedItems();
 
   const handleCopy = async (event, shouldOpenEditForm) => {
     event.preventDefault();

@@ -33593,7 +33593,7 @@ function App() {
       alert = _useState4[0],
       setAlert = _useState4[1];
 
-  var _useState5 = useState(StudioAPI.getSelectedItems()),
+  var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
       selectedItems = _useState6[0];
       _useState6[1];
@@ -33632,6 +33632,8 @@ function App() {
       message: alert.message
     }));
   };
+
+  StudioAPI.getSelectedItems();
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {
