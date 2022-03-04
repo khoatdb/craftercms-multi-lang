@@ -69,7 +69,7 @@
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "commit": "git add ../static-assets/plugins/org/craftercms/plugin/apps/toolbar/index.js && git commit -m 'Update Plugin'",
+    "commit": "git add ../static-assets/plugins/org/craftercms/plugin/translate/apps/toolbar/index.js && git commit -m 'Update Plugin'",
     "watch": "rollup --config rollup.config.js -w",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
