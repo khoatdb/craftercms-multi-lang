@@ -160,14 +160,10 @@ export default function App() {
     setOpen(false);
   };
 
-  const onClickCopy = (event) => {
-    setOpen(true)
-  };
-
   return (
       <ThemeProvider theme={theme}>
         { selectedItem && (
-          <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+          <StyledPopupButton className="ItemTranslate cursor" onClick={() => setOpen(true)}>
             <TranslateIcon />
             Translate
           </StyledPopupButton>
