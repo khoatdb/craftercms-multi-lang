@@ -35769,7 +35769,7 @@ function FileSystemNavigator(_ref) {
 var DEFAULT_WEBSITE_PATH = '/site/website';
 var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
-var darkTheme = createTheme({
+createTheme({
   palette: {
     mode: 'dark'
   }
@@ -35995,9 +35995,7 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(ThemeProvider, {
-    theme: darkTheme
-  }, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
+  return /*#__PURE__*/React$1.createElement(ThemeProvider, null, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
   }, "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
