@@ -26938,56 +26938,6 @@ var StyledTableRow = styled$1(TableRow$1)(function (_ref3) {
   };
 });
 
-/*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-function createData(name, path) {
-  return {
-    name: name,
-    path: path
-  };
-}
-
-function SelectedItem(_ref) {
-  var selectedItems = _ref.selectedItems;
-  var rows = selectedItems.map(function (item) {
-    return createData(item.name, item.path);
-  });
-  return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, /*#__PURE__*/React$1.createElement(Grid$1, {
-    container: true,
-    sx: {
-      padding: '15px'
-    }
-  }, /*#__PURE__*/React$1.createElement(TableContainer$1, {
-    component: Paper$1
-  }, /*#__PURE__*/React$1.createElement(Table$1, {
-    sx: {
-      minWidth: 650
-    },
-    "aria-label": "selected item table"
-  }, /*#__PURE__*/React$1.createElement(TableHead$1, null, /*#__PURE__*/React$1.createElement(TableRow$1, null, /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Name"), /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Path"))), /*#__PURE__*/React$1.createElement(TableBody$1, null, rows.map(function (row) {
-    return /*#__PURE__*/React$1.createElement(StyledTableRow, {
-      key: row.name
-    }, /*#__PURE__*/React$1.createElement(StyledTableCell, {
-      component: "th",
-      scope: "row"
-    }, row.name), /*#__PURE__*/React$1.createElement(StyledTableCell, null, row.path));
-  }))))));
-}
-
 /**
  * @ignore - internal component.
  */
@@ -34838,21 +34788,20 @@ var StudioAPI = {
 
     return CookieHelper.get('crafterSite');
   },
-  getSelectedItems: function getSelectedItems() {
+  getSelectedItem: function getSelectedItem() {
     if (!craftercms.getStore().getState().preview.guest) {
-      return [];
+      return null;
     }
 
     var selectedPath = craftercms.getStore().getState().preview.guest.path;
-    if (!selectedPath) return [];
+    if (!selectedPath) return null;
     var item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
-    if (!item) return [];
-    var selectedItem = {
+    if (!item) return null;
+    return {
       name: item.label,
       path: item.path,
       contentType: item.contentTypeId
     };
-    return [selectedItem];
   },
   openEditForm: function openEditForm(contentType, path) {
     var site = CrafterCMSNext.system.store.getState().sites.active;
@@ -35333,8 +35282,7 @@ function RenameFolderDialog(_ref) {
 var copyDestSub = new Subject('');
 
 function FileSystemNavigator(_ref) {
-  _ref.selectedItems;
-      var rootDir = _ref.rootDir;
+  var rootDir = _ref.rootDir;
 
   var _useState = useState([]),
       _useState2 = _slicedToArray$1(_useState, 2),
@@ -35654,22 +35602,18 @@ var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
 /**
  * Get root directory
- * If all /site/website => root directory
- * If all /site/components => root directory
+ * If /site/website => root directory
+ * If /site/components => root directory
  * Default: /site
  * @returns root directory
  */
 
-var getRootDir = function getRootDir(items) {
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_WEBSITE_PATH);
-  })) {
+var getRootDir = function getRootDir(item) {
+  if (item.path && item.path.startsWith(DEFAULT_WEBSITE_PATH)) {
     return DEFAULT_WEBSITE_PATH;
   }
 
-  if (items.every(function (elm) {
-    return elm.path && elm.path.startsWith(DEFAULT_COMPONENT_PATH);
-  })) {
+  if (item.path && item.path.startsWith(DEFAULT_COMPONENT_PATH)) {
     return DEFAULT_COMPONENT_PATH;
   }
 
@@ -35718,8 +35662,8 @@ function App() {
       isProcessing = _useState8[0],
       setIsProcessing = _useState8[1];
 
-  var selectedItems = StudioAPI.getSelectedItems();
-  var rootDir = getRootDir(selectedItems);
+  var selectedItem = StudioAPI.getSelectedItem();
+  var rootDir = getRootDir(selectedItem);
   copyDestSub.subscribe(function (path) {
     setDesPath(path);
   });
@@ -35746,15 +35690,15 @@ function App() {
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {
-      var selectedItems, paths, i, path, destinationPath, res, pastePath;
+      var selectedItem, path, destinationPath, res, pastePath;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               event.preventDefault();
-              selectedItems = StudioAPI.getSelectedItems();
+              selectedItem = StudioAPI.getSelectedItem();
 
-              if (!(isProcessing || !desPath || !selectedItems.length)) {
+              if (!(isProcessing || !desPath || !selectedItem || !selectedItem.path)) {
                 _context.next = 4;
                 break;
               }
@@ -35763,41 +35707,29 @@ function App() {
 
             case 4:
               setIsProcessing(true);
-              paths = selectedItems.map(function (item) {
-                return item.path;
-              });
-              i = 0;
-
-            case 7:
-              if (!(i < paths.length)) {
-                _context.next = 24;
-                break;
-              }
-
-              path = paths[i];
+              path = selectedItem.path;
               destinationPath = desPath;
-              _context.next = 12;
+              _context.next = 9;
               return StudioAPI.copyItem(path, destinationPath);
 
-            case 12:
+            case 9:
               res = _context.sent;
 
               if (!res) {
-                _context.next = 19;
+                _context.next = 15;
                 break;
               }
 
-              console.log(res);
               pastePath = res.items[0]; // Open edit form if there is only 1 item
 
               if (shouldOpenEditForm && paths.length === 1) {
                 StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
               }
 
-              _context.next = 21;
+              _context.next = 17;
               break;
 
-            case 19:
+            case 15:
               setIsProcessing(false);
               return _context.abrupt("return", setAlert({
                 open: true,
@@ -35805,12 +35737,7 @@ function App() {
                 message: "There is an error while copying file: ".concat(paths[i])
               }));
 
-            case 21:
-              i += 1;
-              _context.next = 7;
-              break;
-
-            case 24:
+            case 17:
               setAlert({
                 open: true,
                 severity: 'success',
@@ -35818,7 +35745,7 @@ function App() {
               });
               setIsProcessing(false);
 
-            case 26:
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -35854,11 +35781,10 @@ function App() {
   }, /*#__PURE__*/React$1.createElement(DialogTitle$1, {
     id: "alert-dialog-title"
   }, "Translate"), /*#__PURE__*/React$1.createElement(DialogContent$1, null, /*#__PURE__*/React$1.createElement(SelectedItem, {
-    selectedItems: selectedItems
+    selectedItem: selectedItem
   }), /*#__PURE__*/React$1.createElement(FileSystemNavigator, {
-    selectedItems: selectedItems,
     rootDir: rootDir
-  })), /*#__PURE__*/React$1.createElement(DialogActions$1, null, selectedItems.length === 1 && /*#__PURE__*/React$1.createElement(StyledMainButton, {
+  })), /*#__PURE__*/React$1.createElement(DialogActions$1, null, selectedItem && /*#__PURE__*/React$1.createElement(StyledMainButton, {
     variant: "contained",
     color: "primary",
     onClick: handleCopyAndOpen,
