@@ -35891,7 +35891,9 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(CrafterCMSNextBridge, null, /*#__PURE__*/React$1.createElement(ThemeProvider, {
+  return /*#__PURE__*/React$1.createElement(CrafterCMSNextBridge, {
+    themeOptions: CrafterCMSNext.system.defaultThemeOptions
+  }, /*#__PURE__*/React$1.createElement(ThemeProvider, {
     theme: theme
   }, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",

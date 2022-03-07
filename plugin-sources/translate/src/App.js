@@ -164,7 +164,7 @@ export default function App() {
   };
 
   return (
-    <CrafterCMSNextBridge>
+    <CrafterCMSNextBridge themeOptions={CrafterCMSNext.system.defaultThemeOptions}>
       <ThemeProvider theme={theme}>
         { selectedItem && (
           <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
