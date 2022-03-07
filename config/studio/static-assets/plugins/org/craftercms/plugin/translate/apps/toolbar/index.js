@@ -35769,7 +35769,7 @@ function App() {
               pastePath = res.items[0];
 
               if (shouldOpenEditForm && path) {
-                StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
+                StudioAPI.openEditForm(selectedItem.contentType, pastePath);
               }
 
               _context.next = 17;

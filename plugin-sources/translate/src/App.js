@@ -120,7 +120,7 @@ export default function App() {
       if (res) {
         const pastePath = res.items[0];
         if (shouldOpenEditForm && path) {
-          StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
+          StudioAPI.openEditForm(selectedItem.contentType, pastePath);
         }
       } else {
         setIsProcessing(false);
