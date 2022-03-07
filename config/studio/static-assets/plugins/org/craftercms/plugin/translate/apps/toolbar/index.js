@@ -35708,7 +35708,7 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
+  return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
   }, /*#__PURE__*/React$1.createElement(default_1$4, null), "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {

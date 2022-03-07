@@ -150,10 +150,12 @@ export default function App() {
 
   return (
     <>
-      <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
-        <TranslateIcon />
-        Translate
-      </StyledPopupButton>
+      { selectedItem && (
+        <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+          <TranslateIcon />
+          Translate
+        </StyledPopupButton>
+      )}
       <Dialog
         open={open}
         fullWidth
