@@ -26056,6 +26056,54 @@ const AlertTitle = /*#__PURE__*/React$1.forwardRef(function AlertTitle(inProps, 
 });
 var AlertTitle$1 = AlertTitle;
 
+var Translate = {};
+
+var interopRequireDefault = {exports: {}};
+
+(function (module) {
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+}(interopRequireDefault));
+
+var createSvgIcon = {};
+
+(function (exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _utils.createSvgIcon;
+  }
+});
+
+var _utils = require$$0;
+}(createSvgIcon));
+
+var _interopRequireDefault$5 = interopRequireDefault.exports;
+
+Object.defineProperty(Translate, "__esModule", {
+  value: true
+});
+var default_1$4 = Translate.default = void 0;
+
+var _createSvgIcon$4 = _interopRequireDefault$5(createSvgIcon);
+
+var _jsxRuntime$4 = jsxRuntime.exports;
+
+var _default$5 = (0, _createSvgIcon$4.default)( /*#__PURE__*/(0, _jsxRuntime$4.jsx)("path", {
+  d: "m12.87 15.07-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7 1.62-4.33L19.12 17h-3.24z"
+}), 'Translate');
+
+default_1$4 = Translate.default = _default$5;
+
 /**
  * @ignore - internal component.
  */
@@ -26926,9 +26974,7 @@ var StyledTableCell = styled$1(TableCell$1)(function (_ref) {
   var _ref2;
 
   _ref.theme;
-  return _ref2 = {}, _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.head), {// backgroundColor: '#7e9dbb',
-    // color: theme.palette.common.white,
-  }), _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.body), {
+  return _ref2 = {}, _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.head), {}), _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.body), {
     fontSize: 14
   }), _ref2;
 });
@@ -28759,35 +28805,6 @@ const TreeItem = /*#__PURE__*/React$1.forwardRef(function TreeItem(inProps, ref)
 var TreeItem$1 = TreeItem;
 
 var ExpandMore = {};
-
-var interopRequireDefault = {exports: {}};
-
-(function (module) {
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
-}(interopRequireDefault));
-
-var createSvgIcon = {};
-
-(function (exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "default", {
-  enumerable: true,
-  get: function () {
-    return _utils.createSvgIcon;
-  }
-});
-
-var _utils = require$$0;
-}(createSvgIcon));
 
 var _interopRequireDefault$4 = interopRequireDefault.exports;
 
@@ -33000,27 +33017,11 @@ var StyledActionButton = styled$1(Button$1)(function (_ref) {
 });
 var StyledMainButton = styled$1(StyledActionButton)(function (_ref2) {
   _ref2.theme;
-  return {
-    // color: theme.palette.common.white,
-    // backgroundColor: '#7e9dbb',
-    // borderColor:'#6d90b2',
-    '&:hover': {// backgroundColor: '#5d84a9',
-      // color: theme.palette.common.white,
-      // borderColor: '#4e7294',
-    }
-  };
+  return {};
 });
 var StyledCancelButton = styled$1(StyledActionButton)(function (_ref3) {
   _ref3.theme;
-  return {
-    // color: '#333',
-    // backgroundColor: theme.palette.common.white,
-    // borderColor: '#ccc',
-    '&:hover': {// backgroundColor: '#e6e6e6',
-      // color: '#333',
-      // borderColor: '#adadad',
-    }
-  };
+  return {};
 });
 
 var cjs = {exports: {}};
@@ -35703,11 +35704,6 @@ function FileSystemNavigator(_ref) {
 var DEFAULT_WEBSITE_PATH = '/site/website';
 var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
-createTheme({
-  palette: {
-    mode: 'dark'
-  }
-});
 /**
  * Get root directory
  * If all /site/website => root directory
@@ -35932,7 +35928,7 @@ function App() {
   return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
-  }, "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
+  }, /*#__PURE__*/React$1.createElement(default_1$4, null), "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
     open: open,
     fullWidth: true,
     maxWidth: "lg",

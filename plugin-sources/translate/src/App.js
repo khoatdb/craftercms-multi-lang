@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -23,7 +23,8 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 import SelectedItems from './components/SelectedItems';
 import TreeView from './components/TreeView';
@@ -35,12 +36,6 @@ import StudioAPI from './api/studio';
 const DEFAULT_WEBSITE_PATH = '/site/website';
 const DEFAULT_COMPONENT_PATH = '/site/components';
 const ALERT_AUTO_HIDE_DURATION = 4000;
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
 /**
  * Get root directory
@@ -191,6 +186,7 @@ export default function App() {
   return (
     <>
       <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+        <TranslateIcon />
         Translate
       </StyledPopupButton>
       <Dialog
