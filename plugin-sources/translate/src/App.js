@@ -119,8 +119,7 @@ export default function App() {
       const res = await StudioAPI.copyItem(path, destinationPath)
       if (res) {
         const pastePath = res.items[0];
-        // Open edit form if there is only 1 item
-        if (shouldOpenEditForm && paths.length === 1) {
+        if (shouldOpenEditForm && path) {
           StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
         }
       } else {
@@ -128,7 +127,7 @@ export default function App() {
         return setAlert({
           open: true,
           severity: 'error',
-          message: `There is an error while copying file: ${paths[i]}`,
+          message: `There is an error while copying file: ${path}`,
         });
       }
 

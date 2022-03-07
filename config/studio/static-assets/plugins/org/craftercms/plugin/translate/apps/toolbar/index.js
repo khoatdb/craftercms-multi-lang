@@ -35766,9 +35766,9 @@ function App() {
                 break;
               }
 
-              pastePath = res.items[0]; // Open edit form if there is only 1 item
+              pastePath = res.items[0];
 
-              if (shouldOpenEditForm && paths.length === 1) {
+              if (shouldOpenEditForm && path) {
                 StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
               }
 
@@ -35780,7 +35780,7 @@ function App() {
               return _context.abrupt("return", setAlert({
                 open: true,
                 severity: 'error',
-                message: "There is an error while copying file: ".concat(paths[i])
+                message: "There is an error while copying file: ".concat(path)
               }));
 
             case 17:
