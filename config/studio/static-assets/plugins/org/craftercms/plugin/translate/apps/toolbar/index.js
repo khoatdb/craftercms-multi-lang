@@ -35609,11 +35609,11 @@ var ALERT_AUTO_HIDE_DURATION = 4000;
  */
 
 var getRootDir = function getRootDir(item) {
-  if (item.path && item.path.startsWith(DEFAULT_WEBSITE_PATH)) {
+  if (item && item.path && item.path.startsWith(DEFAULT_WEBSITE_PATH)) {
     return DEFAULT_WEBSITE_PATH;
   }
 
-  if (item.path && item.path.startsWith(DEFAULT_COMPONENT_PATH)) {
+  if (item && item.path && item.path.startsWith(DEFAULT_COMPONENT_PATH)) {
     return DEFAULT_COMPONENT_PATH;
   }
 
