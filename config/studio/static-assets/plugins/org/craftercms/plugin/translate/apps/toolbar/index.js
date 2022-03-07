@@ -35897,12 +35897,10 @@ function App() {
       setDesPath(path);
     });
     return function () {
-      console.log(copyDestSub.closed);
-      console.log(copyDestSub);
-
-      if (!copyDestSub.closed) {
-        console.log(copyDestSub);
+      try {
         copyDestSub.unsubscribe();
+      } catch (ex) {
+        console.log("Subject has been unsubscribed: ".concat(ex));
       }
     };
   }, []);
