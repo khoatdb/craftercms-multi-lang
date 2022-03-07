@@ -129,6 +129,18 @@ export default function App() {
   const selectedItems = StudioAPI.getSelectedItems();
   const rootDir = getRootDir(selectedItems);
 
+  useEffect(() => {
+    copyDestSub.subscribe((path) => {
+      setDesPath(path);
+    });
+
+    return () => {
+      if (!copyDestSub.closed) {
+        copyDestSub.unsubscribe();
+      }
+    }
+  }, []);
+
   const resetState = () => {
     setDesPath('');
     setIsProcessing(false);
@@ -194,16 +206,6 @@ export default function App() {
     handleCopy(event, shouldOpenEditForm);
     setOpen(false);
   };
-
-  useEffect(() => {
-    copyDestSub.subscribe((path) => {
-      setDesPath(path);
-    });
-
-    return () => {
-      copyDestSub.unsubscribe();
-    }
-  }, [copyDestSub]);
 
   const onClickCopy = (event) => {
     setOpen(true)

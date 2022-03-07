@@ -35892,6 +35892,16 @@ function App() {
 
   var selectedItems = StudioAPI.getSelectedItems();
   var rootDir = getRootDir(selectedItems);
+  useEffect(function () {
+    copyDestSub.subscribe(function (path) {
+      setDesPath(path);
+    });
+    return function () {
+      if (!copyDestSub.closed) {
+        copyDestSub.unsubscribe();
+      }
+    };
+  }, []);
 
   var resetState = function resetState() {
     setDesPath('');
@@ -36005,15 +36015,6 @@ function App() {
     handleCopy(event, shouldOpenEditForm);
     setOpen(false);
   };
-
-  useEffect(function () {
-    copyDestSub.subscribe(function (path) {
-      setDesPath(path);
-    });
-    return function () {
-      copyDestSub.unsubscribe();
-    };
-  }, [copyDestSub]);
 
   var onClickCopy = function onClickCopy(event) {
     setOpen(true);
