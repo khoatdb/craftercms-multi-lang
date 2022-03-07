@@ -128,16 +128,9 @@ export default function App() {
 
   const selectedItems = StudioAPI.getSelectedItems();
   const rootDir = getRootDir(selectedItems);
-
-  useEffect(() => {
-    copyDestSub.subscribe((path) => {
-      setDesPath(path);
-    });
-
-    return () => {
-      copyDestSub.unsubscribe();
-    }
-  }, []);
+  copyDestSub.subscribe((path) => {
+    setDesPath(path);
+  });
 
   const resetState = () => {
     setDesPath('');

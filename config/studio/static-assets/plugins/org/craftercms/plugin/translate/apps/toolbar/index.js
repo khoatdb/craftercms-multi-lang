@@ -35893,14 +35893,9 @@ function App() {
 
   var selectedItems = StudioAPI.getSelectedItems();
   var rootDir = getRootDir(selectedItems);
-  useEffect(function () {
-    copyDestSub.subscribe(function (path) {
-      setDesPath(path);
-    });
-    return function () {
-      copyDestSub.unsubscribe();
-    };
-  }, []);
+  copyDestSub.subscribe(function (path) {
+    setDesPath(path);
+  });
 
   var resetState = function resetState() {
     setDesPath('');
