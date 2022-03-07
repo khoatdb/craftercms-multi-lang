@@ -44,14 +44,16 @@ export default function SelectedItem({ selectedItem }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow
+              {row && (
+                <StyledTableRow
                 key={row.name}
-              >
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell>{row.path}</StyledTableCell>
-              </StyledTableRow>
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell>{row.path}</StyledTableCell>
+                </StyledTableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

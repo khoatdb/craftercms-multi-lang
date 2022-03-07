@@ -26976,7 +26976,7 @@ function SelectedItem(_ref) {
       minWidth: 650
     },
     "aria-label": "selected item table"
-  }, /*#__PURE__*/React$1.createElement(TableHead$1, null, /*#__PURE__*/React$1.createElement(TableRow$1, null, /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Name"), /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Path"))), /*#__PURE__*/React$1.createElement(TableBody$1, null, /*#__PURE__*/React$1.createElement(StyledTableRow, {
+  }, /*#__PURE__*/React$1.createElement(TableHead$1, null, /*#__PURE__*/React$1.createElement(TableRow$1, null, /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Name"), /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Path"))), /*#__PURE__*/React$1.createElement(TableBody$1, null, row && /*#__PURE__*/React$1.createElement(StyledTableRow, {
     key: row.name
   }, /*#__PURE__*/React$1.createElement(StyledTableCell, {
     component: "th",
