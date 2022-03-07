@@ -1,4 +1,4 @@
-var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect } = craftercms.libs.React;
+var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect, useMemo } = craftercms.libs.React;
 var React$1 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { unstable_useEnhancedEffect, unstable_useId, useForkRef: useForkRef$1, useControlled: useControlled$1, ownerDocument: ownerDocument$1 } = craftercms.libs.MaterialUI;
 var require$$0 = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
@@ -35782,7 +35782,8 @@ function App() {
     setDesPath(path);
   });
   var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  var theme = React$1.useMemo(function () {
+  console.log(prefersDarkMode);
+  var theme = useMemo(function () {
     return createTheme({
       palette: {
         mode: prefersDarkMode ? 'dark' : 'light'

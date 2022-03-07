@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useMemo } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -85,8 +85,9 @@ export default function App() {
   });
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  console.log(prefersDarkMode);
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
