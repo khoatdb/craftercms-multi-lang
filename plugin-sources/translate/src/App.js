@@ -61,28 +61,6 @@ const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const NoSelectedItems = () => {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert variant="outlined" severity="error">
-        <AlertTitle>Error</AlertTitle>
-        Please select at least one item to copy.
-      </Alert>
-    </Stack>
-  );
-};
-
-const MixedSelectedItems = () => {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert variant="outlined" severity="error">
-        <AlertTitle>Error</AlertTitle>
-        Mixed content types are selected. All items must be in the same category (Pages or Components).
-      </Alert>
-    </Stack>
-  );
-}
-
 /**
  * Context menu button to open copy dialog
  * Align with Crafter CMS 3.1.x context menu items
@@ -191,21 +169,6 @@ export default function App() {
         onClose={handleClose}
       >
         <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
-        <DialogContent>
-          {selectedItems.length === 0 ?
-            <NoSelectedItems /> :
-            (
-              <>
-                <SelectedItems selectedItems={selectedItems} />
-                { !!rootDir ? (
-                  <TreeView selectedItems={selectedItems} rootDir={rootDir} />
-                ) : (
-                  <MixedSelectedItems />
-                )}
-              </>
-            )
-          }
-        </DialogContent>
         <DialogActions>
           {
             selectedItems.length === 1 && (
