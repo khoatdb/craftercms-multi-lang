@@ -201,9 +201,9 @@ export default function App() {
     });
 
     return () => {
-      // copyDestSub.unsubscribe();
+      copyDestSub.unsubscribe();
     }
-  }, []);
+  }, [copyDestSub]);
 
   const onClickCopy = (event) => {
     setOpen(true)
