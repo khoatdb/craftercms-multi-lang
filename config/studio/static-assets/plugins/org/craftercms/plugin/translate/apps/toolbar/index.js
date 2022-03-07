@@ -33065,9 +33065,9 @@ var StyledActionButton = styled$1(Button$1)(function (_ref) {
   };
 });
 var StyledMainButton = styled$1(StyledActionButton)(function (_ref2) {
-  var theme = _ref2.theme;
+  _ref2.theme;
   return {
-    color: theme.palette.common.white,
+    // color: theme.palette.common.white,
     // backgroundColor: '#7e9dbb',
     // borderColor:'#6d90b2',
     '&:hover': {// backgroundColor: '#5d84a9',

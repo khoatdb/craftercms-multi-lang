@@ -22,7 +22,7 @@ const StyledActionButton = styled(Button)(({ theme }) => ({
 }));
 
 const StyledMainButton = styled(StyledActionButton)(({ theme }) => ({
-  color: theme.palette.common.white,
+  // color: theme.palette.common.white,
   // backgroundColor: '#7e9dbb',
   // borderColor:'#6d90b2',
   '&:hover': {
