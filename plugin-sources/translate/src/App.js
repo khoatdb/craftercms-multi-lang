@@ -22,9 +22,10 @@ import DialogActions from '@mui/material/DialogActions';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import { styled } from '@mui/material/styles';
 import TranslateIcon from '@mui/icons-material/Translate';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import SelectedItem from './components/SelectedItem';
 import TreeView from './components/TreeView';
@@ -82,6 +83,18 @@ export default function App() {
   copyDestSub.subscribe((path) => {
     setDesPath(path);
   });
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
 
   const resetState = () => {
     setDesPath('');
@@ -149,7 +162,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       { selectedItem && (
         <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
           <TranslateIcon />
@@ -207,6 +220,6 @@ export default function App() {
           </Alert>
         </Snackbar>
       </Stack>
-    </>
+    </ThemeProvider>
   );
 }
