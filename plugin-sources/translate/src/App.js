@@ -203,7 +203,7 @@ export default function App() {
     return () => {
       copyDestSub.unsubscribe();
     }
-  }, [path]);
+  }, []);
 
   const onClickCopy = (event) => {
     setOpen(true)
