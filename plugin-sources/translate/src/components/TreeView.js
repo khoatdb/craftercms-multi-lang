@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -34,7 +34,7 @@ import RenameFolderDialog from './RenameFolderDialog';
 import StudioAPI from '../api/studio';
 import { copyDestSub } from '../service/subscribe';
 
-export default function FileSystemNavigator({ selectedItems, rootDir }) {
+export default function FileSystemNavigator({ rootDir }) {
   const [nodes, setNodes] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const [selected, setSelected] = useState('');

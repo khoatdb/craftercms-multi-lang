@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, forwardRef, useMemo } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -22,53 +22,37 @@ import DialogActions from '@mui/material/DialogActions';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import TranslateIcon from '@mui/icons-material/Translate';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import SelectedItems from './components/SelectedItems';
+import SelectedItem from './components/SelectedItem';
 import TreeView from './components/TreeView';
 import { StyledCancelButton, StyledMainButton } from './components/StyledButton';
 
 import { copyDestSub } from './service/subscribe';
 import StudioAPI from './api/studio';
 
+const CrafterCMSNextBridge = CrafterCMSNext.components.CrafterCMSNextBridge;
+
 const DEFAULT_WEBSITE_PATH = '/site/website';
 const DEFAULT_COMPONENT_PATH = '/site/components';
 const ALERT_AUTO_HIDE_DURATION = 4000;
 
 /**
- * Theme style to align with Crafter CMS 3.1.x
- */
-const customTheme = createTheme({
-  palette: {
-    primary: {
-      light: '#7e9dbb',
-      main: '#6d90b2',
-      dark: '#52779b',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
-
-/**
  * Get root directory
- * If all /site/website => root directory
- * If all /site/components => root directory
+ * If /site/website => root directory
+ * If /site/components => root directory
  * Default: /site
  * @returns root directory
  */
-  const getRootDir = (items) => {
-  if (items.every((elm) => elm.path && elm.path.startsWith(DEFAULT_WEBSITE_PATH))) {
+  const getRootDir = (item) => {
+  if (item && item.path && item.path.startsWith(DEFAULT_WEBSITE_PATH)) {
     return DEFAULT_WEBSITE_PATH;
   }
 
-  if (items.every((elm) => elm.path && elm.path.startsWith(DEFAULT_COMPONENT_PATH))) {
+  if (item && item.path && item.path.startsWith(DEFAULT_COMPONENT_PATH)) {
     return DEFAULT_COMPONENT_PATH;
   }
 
@@ -80,44 +64,14 @@ const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const NoSelectedItems = () => {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert variant="outlined" severity="error">
-        <AlertTitle>Error</AlertTitle>
-        Please select at least one item to copy.
-      </Alert>
-    </Stack>
-  );
-};
-
-const MixedSelectedItems = () => {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert variant="outlined" severity="error">
-        <AlertTitle>Error</AlertTitle>
-        Mixed content types are selected. All items must be in the same category (Pages or Components).
-      </Alert>
-    </Stack>
-  );
-}
-
 /**
  * Context menu button to open copy dialog
- * Align with Crafter CMS 3.1.x context menu items
  */
 const StyledPopupButton = styled('a')(({ theme }) => ({
   cursor: 'pointer',
-  padding: '16.5px 10px 15.5px 0px !important',
-  color: '#777',
-  lineHeight: '17px',
+  lineHeight: 1.5,
   position: 'relative',
-  display: 'block',
-  textDecoration: 'none',
-  '&:hover': {
-    color: '#333',
-    textDecoration: 'none',
-  }
+  display: 'flex'
 }));
 
 export default function App() {
@@ -126,8 +80,24 @@ export default function App() {
   const [desPath, setDesPath] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const selectedItems = StudioAPI.getSelectedItems();
-  const rootDir = getRootDir(selectedItems);
+  const selectedItem = StudioAPI.getSelectedItem();
+  const rootDir = getRootDir(selectedItem);
+  copyDestSub.subscribe((path) => {
+    setDesPath(path);
+  });
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+        ...CrafterCMSNext.system.defaultThemeOptions
+      }),
+    [prefersDarkMode],
+  );
 
   const resetState = () => {
     setDesPath('');
@@ -152,34 +122,29 @@ export default function App() {
   const handleCopy = async (event, shouldOpenEditForm) => {
     event.preventDefault();
 
-    const selectedItems = StudioAPI.getSelectedItems();
+    const selectedItem = StudioAPI.getSelectedItem();
 
-    if (isProcessing || !desPath || !selectedItems.length) {
+    if (isProcessing || !desPath || !selectedItem || !selectedItem.path) {
       return;
     }
 
     setIsProcessing(true);
-    const paths = selectedItems.map(item => item.path);
-    for (let i =0; i < paths.length; i += 1) {
-      const path = paths[i];
+    const path = selectedItem.path;
       const destinationPath = desPath;
       const res = await StudioAPI.copyItem(path, destinationPath)
       if (res) {
-        console.log(res);
         const pastePath = res.items[0];
-        // Open edit form if there is only 1 item
-        if (shouldOpenEditForm && paths.length === 1) {
-          StudioAPI.openEditForm(selectedItems[0].contentType, pastePath);
+        if (shouldOpenEditForm && path) {
+          StudioAPI.openEditForm(selectedItem.contentType, pastePath);
         }
       } else {
         setIsProcessing(false);
         return setAlert({
           open: true,
           severity: 'error',
-          message: `There is an error while copying file: ${paths[i]}`,
+          message: `There is an error while copying file: ${path}`,
         });
       }
-    }
 
     setAlert({
       open: true,
@@ -195,87 +160,65 @@ export default function App() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    copyDestSub.subscribe((path) => {
-      setDesPath(path);
-    });
-
-    return () => {
-      //copyDestSub.unsubscribe();
-    }
-  }, []);
-
-  const onClickCopy = (event) => {
-    setOpen(true)
-  };
-
   return (
-    <ThemeProvider theme={customTheme}>
-      <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
-        Translate
-      </StyledPopupButton>
-      <Dialog
-        open={open}
-        fullWidth
-        maxWidth="lg"
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        onClose={handleClose}
-      >
-        <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
-        <DialogContent>
-          {selectedItems.length === 0 ?
-            <NoSelectedItems /> :
-            (
-              <>
-                <SelectedItems selectedItems={selectedItems} />
-                { !!rootDir ? (
-                  <TreeView selectedItems={selectedItems} rootDir={rootDir} />
-                ) : (
-                  <MixedSelectedItems />
-                )}
-              </>
-            )
-          }
-        </DialogContent>
-        <DialogActions>
-          {
-            selectedItems.length === 1 && (
-              <StyledMainButton
+      <ThemeProvider theme={theme}>
+        { selectedItem && (
+          <StyledPopupButton className="ItemTranslate cursor" onClick={() => setOpen(true)}>
+            <TranslateIcon />
+            Translate
+          </StyledPopupButton>
+        )}
+        <Dialog
+          open={open}
+          fullWidth
+          maxWidth="lg"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          onClose={handleClose}
+        >
+          <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
+          <DialogContent>
+            <SelectedItem selectedItem={selectedItem} />
+            <TreeView rootDir={rootDir} />
+          </DialogContent>
+          <DialogActions>
+            {
+              selectedItem && (
+                <StyledMainButton
+                  variant="contained"
+                  color="primary"
+                  onClick={handleCopyAndOpen}
+                  disabled={isProcessing || !rootDir || !desPath}
+                >
+                  Copy and Edit
+                </StyledMainButton>
+              )
+            }
+            <StyledMainButton
                 variant="contained"
                 color="primary"
-                onClick={handleCopyAndOpen}
+                onClick={handleCopy}
                 disabled={isProcessing || !rootDir || !desPath}
               >
-                Copy and Edit
-              </StyledMainButton>
-            )
-          }
-          <StyledMainButton
-              variant="contained"
-              color="primary"
-              onClick={handleCopy}
-              disabled={isProcessing || !rootDir || !desPath}
-            >
-              Copy
-          </StyledMainButton>
-          <StyledCancelButton
-              variant="outlined"
-              color="primary"
-              onClick={handleClose}
-              disabled={isProcessing}
-            >
-              Close
-            </StyledCancelButton>
-        </DialogActions>
-      </Dialog>
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={alert && alert.open} autoHideDuration={ALERT_AUTO_HIDE_DURATION} onClose={onCloseAlert}>
-          <Alert onClose={onCloseAlert} severity={alert.severity} sx={{ width: '100%' }}>
-            {alert.message}
-          </Alert>
-        </Snackbar>
-      </Stack>
-    </ThemeProvider>
+                Copy
+            </StyledMainButton>
+            <StyledCancelButton
+                variant="outlined"
+                color="primary"
+                onClick={handleClose}
+                disabled={isProcessing}
+              >
+                Close
+              </StyledCancelButton>
+          </DialogActions>
+        </Dialog>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+          <Snackbar open={alert && alert.open} autoHideDuration={ALERT_AUTO_HIDE_DURATION} onClose={onCloseAlert}>
+            <Alert onClose={onCloseAlert} severity={alert.severity} sx={{ width: '100%' }}>
+              {alert.message}
+            </Alert>
+          </Snackbar>
+        </Stack>
+      </ThemeProvider>
   );
 }

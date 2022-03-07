@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -29,8 +29,8 @@ function createData(name, path) {
   return { name, path };
 }
 
-export default function SelectedItem({ selectedItems }) {
-  const rows = selectedItems.map(item => createData(item.name, item.path));
+export default function SelectedItem({ selectedItem }) {
+  const row = selectedItem ? createData(selectedItem.name, selectedItem.path) : null;
 
   return (
     <>
@@ -44,16 +44,16 @@ export default function SelectedItem({ selectedItems }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {row && (
                 <StyledTableRow
-                  key={row.name}
+                key={row.name}
                 >
                   <StyledTableCell component="th" scope="row">
                     {row.name}
                   </StyledTableCell>
                   <StyledTableCell>{row.path}</StyledTableCell>
                 </StyledTableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>
