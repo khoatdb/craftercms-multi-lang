@@ -26991,10 +26991,9 @@ var TableCell$1 = TableCell;
 var StyledTableCell = styled$1(TableCell$1)(function (_ref) {
   var _ref2;
 
-  var theme = _ref.theme;
-  return _ref2 = {}, _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.head), {
-    backgroundColor: '#7e9dbb',
-    color: theme.palette.common.white
+  _ref.theme;
+  return _ref2 = {}, _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.head), {// backgroundColor: '#7e9dbb',
+    // color: theme.palette.common.white,
   }), _defineProperty$2(_ref2, "&.".concat(tableCellClasses$1.body), {
     fontSize: 14
   }), _ref2;
@@ -33069,25 +33068,23 @@ var StyledMainButton = styled$1(StyledActionButton)(function (_ref2) {
   var theme = _ref2.theme;
   return {
     color: theme.palette.common.white,
-    backgroundColor: '#7e9dbb',
-    borderColor: '#6d90b2',
-    '&:hover': {
-      backgroundColor: '#5d84a9',
-      color: theme.palette.common.white,
-      borderColor: '#4e7294'
+    // backgroundColor: '#7e9dbb',
+    // borderColor:'#6d90b2',
+    '&:hover': {// backgroundColor: '#5d84a9',
+      // color: theme.palette.common.white,
+      // borderColor: '#4e7294',
     }
   };
 });
 var StyledCancelButton = styled$1(StyledActionButton)(function (_ref3) {
-  var theme = _ref3.theme;
+  _ref3.theme;
   return {
-    color: '#333',
-    backgroundColor: theme.palette.common.white,
-    borderColor: '#ccc',
-    '&:hover': {
-      backgroundColor: '#e6e6e6',
-      color: '#333',
-      borderColor: '#adadad'
+    // color: '#333',
+    // backgroundColor: theme.palette.common.white,
+    // borderColor: '#ccc',
+    '&:hover': {// backgroundColor: '#e6e6e6',
+      // color: '#333',
+      // borderColor: '#adadad',
     }
   };
 });
@@ -35554,12 +35551,11 @@ function FileSystemNavigator(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(nodeId);
               setSelected(nodeId);
               copyDestSub.next(nodeId);
               fetchChildNodes(nodeId);
 
-            case 4:
+            case 3:
             case "end":
               return _context.stop();
           }
