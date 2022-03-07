@@ -26,7 +26,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import { styled } from '@mui/material/styles';
 import TranslateIcon from '@mui/icons-material/Translate';
 
-import SelectedItems from './components/SelectedItem';
+import SelectedItem from './components/SelectedItem';
 import TreeView from './components/TreeView';
 import { StyledCancelButton, StyledMainButton } from './components/StyledButton';
 

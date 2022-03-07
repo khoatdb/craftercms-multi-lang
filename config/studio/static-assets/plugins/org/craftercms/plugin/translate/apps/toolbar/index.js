@@ -26938,6 +26938,52 @@ var StyledTableRow = styled$1(TableRow$1)(function (_ref3) {
   };
 });
 
+/*
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+function createData(name, path) {
+  return {
+    name: name,
+    path: path
+  };
+}
+
+function SelectedItem(_ref) {
+  var selectedItem = _ref.selectedItem;
+  var row = createData(selectedItem.name, selectedItem.path);
+  return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, /*#__PURE__*/React$1.createElement(Grid$1, {
+    container: true,
+    sx: {
+      padding: '15px'
+    }
+  }, /*#__PURE__*/React$1.createElement(TableContainer$1, {
+    component: Paper$1
+  }, /*#__PURE__*/React$1.createElement(Table$1, {
+    sx: {
+      minWidth: 650
+    },
+    "aria-label": "selected item table"
+  }, /*#__PURE__*/React$1.createElement(TableHead$1, null, /*#__PURE__*/React$1.createElement(TableRow$1, null, /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Name"), /*#__PURE__*/React$1.createElement(StyledTableCell, null, "Path"))), /*#__PURE__*/React$1.createElement(TableBody$1, null, /*#__PURE__*/React$1.createElement(StyledTableRow, {
+    key: row.name
+  }, /*#__PURE__*/React$1.createElement(StyledTableCell, {
+    component: "th",
+    scope: "row"
+  }, row.name), /*#__PURE__*/React$1.createElement(StyledTableCell, null, row.path)))))));
+}
+
 /**
  * @ignore - internal component.
  */
