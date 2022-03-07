@@ -35773,24 +35773,9 @@ function FileSystemNavigator(_ref) {
 var DEFAULT_WEBSITE_PATH = '/site/website';
 var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
-/**
- * Theme style to align with Crafter CMS 3.1.x
- */
-
-var customTheme = createTheme({
+var darkTheme = createTheme({
   palette: {
-    primary: {
-      light: '#7e9dbb',
-      main: '#6d90b2',
-      dark: '#52779b',
-      contrastText: '#fff'
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000'
-    }
+    mode: 'dark'
   }
 });
 /**
@@ -36015,7 +36000,7 @@ function App() {
   };
 
   return /*#__PURE__*/React$1.createElement(ThemeProvider, {
-    theme: customTheme
+    theme: darkTheme
   }, /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
