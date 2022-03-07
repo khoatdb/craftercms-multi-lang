@@ -30,7 +30,7 @@ function createData(name, path) {
 }
 
 export default function SelectedItem({ selectedItem }) {
-  const row = createData(selectedItem.name, selectedItem.path);
+  const row = selectedItem ? createData(selectedItem.name, selectedItem.path) : null;
 
   return (
     <>

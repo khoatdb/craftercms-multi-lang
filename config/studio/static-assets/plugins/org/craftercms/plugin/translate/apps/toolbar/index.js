@@ -26963,7 +26963,7 @@ function createData(name, path) {
 
 function SelectedItem(_ref) {
   var selectedItem = _ref.selectedItem;
-  var row = createData(selectedItem.name, selectedItem.path);
+  var row = selectedItem ? createData(selectedItem.name, selectedItem.path) : null;
   return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, /*#__PURE__*/React$1.createElement(Grid$1, {
     container: true,
     sx: {
