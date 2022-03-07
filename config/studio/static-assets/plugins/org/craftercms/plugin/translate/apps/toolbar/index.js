@@ -34771,29 +34771,6 @@ function StyledDialogComponent(props) {
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-var CookieHelper = {
-  get: function get(name) {
-    var value = '; ' + document.cookie;
-    var parts = value.split('; ' + name + '=');
-    if (parts.length >= 2) return parts.pop().split(';').shift();
-  }
-};
-
-/*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 var HttpHelper = {
   get: function get(url) {
     return new Promise(function (resolve, reject) {
@@ -34813,8 +34790,6 @@ var HttpHelper = {
 
 var API_GET_ITEM_TREE = '/studio/api/1/services/api/1/content/get-items-tree.json';
 var API_GET_ITEM = '/studio/api/1/services/api/1/content/get-item.json';
-var API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.json';
-var API_CLIPBOARD_PASTE = '/studio/api/1/services/api/1/clipboard/paste-item.json';
 var API_CREATE_FOLDER = '/studio/api/1/services/api/1/content/create-folder.json';
 var API_RENAME_FOLDER = '/studio/api/1/services/api/1/content/rename-folder.json';
 var API_CONTENT_PASTE = '/studio/api/2/content/paste';
@@ -34822,17 +34797,8 @@ var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
   },
-  xsrfToken: function xsrfToken() {
-    return CookieHelper.get('XSRF-TOKEN');
-  },
   siteId: function siteId() {
-    var url = new URL(window.location.href);
-
-    if (url.searchParams.has('site')) {
-      return url.searchParams.get('site');
-    }
-
-    return CookieHelper.get('crafterSite');
+    return CrafterCMSNext.system.store.getState().sites.active;
   },
   getSelectedItem: function getSelectedItem() {
     if (!craftercms.getStore().getState().preview.guest) {
@@ -34861,8 +34827,6 @@ var StudioAPI = {
         path: path,
         type: 'form',
         authoringBase: authoringBase,
-        readonly: false,
-        // TODO: make this configurable
         isHidden: false,
         onSaveSuccess: {
           type: 'BATCH_ACTIONS',
@@ -34995,20 +34959,16 @@ var StudioAPI = {
       }, _callee3);
     }))();
   },
-  clipboardCopy: function clipboardCopy(path) {
+  createFolder: function createFolder(path, name) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
       var body, res;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              body = {
-                item: [{
-                  uri: path
-                }]
-              };
+              body = '';
               _context4.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_COPY, "?site=").concat(StudioAPI.siteId()), body);
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CREATE_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
 
             case 3:
               res = _context4.sent;
@@ -35018,7 +34978,7 @@ var StudioAPI = {
                 break;
               }
 
-              return _context4.abrupt("return", true);
+              return _context4.abrupt("return", res.response);
 
             case 6:
               return _context4.abrupt("return", false);
@@ -35031,101 +34991,36 @@ var StudioAPI = {
       }, _callee4);
     }))();
   },
-  clipboardPaste: function clipboardPaste(parentPath) {
+  renameFolder: function renameFolder(path, name) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var res, data, filePath;
+      var body, res;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              _context5.next = 2;
-              return HttpHelper.get("".concat(StudioAPI.origin()).concat(API_CLIPBOARD_PASTE, "?site=").concat(StudioAPI.siteId(), "&parentPath=").concat(parentPath));
+              body = '';
+              _context5.next = 3;
+              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_RENAME_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
 
-            case 2:
+            case 3:
               res = _context5.sent;
 
               if (!(res.status === 200)) {
-                _context5.next = 7;
+                _context5.next = 6;
                 break;
               }
 
-              data = res.response;
-              filePath = data.status[0];
-              return _context5.abrupt("return", filePath);
+              return _context5.abrupt("return", res.response);
+
+            case 6:
+              return _context5.abrupt("return", false);
 
             case 7:
-              return _context5.abrupt("return", null);
-
-            case 8:
             case "end":
               return _context5.stop();
           }
         }
       }, _callee5);
-    }))();
-  },
-  createFolder: function createFolder(path, name) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-      var body, res;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              body = '';
-              _context6.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_CREATE_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
-
-            case 3:
-              res = _context6.sent;
-
-              if (!(res.status === 200)) {
-                _context6.next = 6;
-                break;
-              }
-
-              return _context6.abrupt("return", res.response);
-
-            case 6:
-              return _context6.abrupt("return", false);
-
-            case 7:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }))();
-  },
-  renameFolder: function renameFolder(path, name) {
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-      var body, res;
-      return regeneratorRuntime.wrap(function _callee7$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-              body = '';
-              _context7.next = 3;
-              return HttpHelper.post("".concat(StudioAPI.origin()).concat(API_RENAME_FOLDER, "?site=").concat(StudioAPI.siteId(), "&path=").concat(path, "&name=").concat(name), body);
-
-            case 3:
-              res = _context7.sent;
-
-              if (!(res.status === 200)) {
-                _context7.next = 6;
-                break;
-              }
-
-              return _context7.abrupt("return", res.response);
-
-            case 6:
-              return _context7.abrupt("return", false);
-
-            case 7:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7);
     }))();
   }
 };
@@ -35675,7 +35570,6 @@ var Alert = /*#__PURE__*/forwardRef(function Alert(props, ref) {
 });
 /**
  * Context menu button to open copy dialog
- * Align with Crafter CMS 3.1.x context menu items
  */
 
 var StyledPopupButton = styled$1('a')(function (_ref) {
