@@ -1041,12 +1041,12 @@ var wellKnownSymbolWrapped = {
 	f: f$3
 };
 
-var path = global_1;
+var path$1 = global_1;
 
 var defineProperty$f = objectDefineProperty.f;
 
 var defineWellKnownSymbol = function (NAME) {
-  var Symbol = path.Symbol || (path.Symbol = {});
+  var Symbol = path$1.Symbol || (path$1.Symbol = {});
   if (!hasOwnProperty_1(Symbol, NAME)) defineProperty$f(Symbol, NAME, {
     value: wellKnownSymbolWrapped.f(NAME)
   });
@@ -33628,7 +33628,8 @@ function App() {
 
   var handleCopy = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, shouldOpenEditForm) {
-      var selectedItems, paths, i, path, destinationPath, res, pastePath;
+      var selectedItems, paths, i, _path, destinationPath, res, pastePath;
+
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -33656,10 +33657,10 @@ function App() {
                 break;
               }
 
-              path = paths[i];
+              _path = paths[i];
               destinationPath = desPath;
               _context.next = 12;
-              return StudioAPI.copyItem(path, destinationPath);
+              return StudioAPI.copyItem(_path, destinationPath);
 
             case 12:
               res = _context.sent;
@@ -33723,9 +33724,10 @@ function App() {
     copyDestSub.subscribe(function (path) {
       setDesPath(path);
     });
-    return function () {//copyDestSub.unsubscribe();
+    return function () {
+      copyDestSub.unsubscribe();
     };
-  }, []);
+  }, [path]);
 
   var onClickCopy = function onClickCopy(event) {
     setOpen(true);
