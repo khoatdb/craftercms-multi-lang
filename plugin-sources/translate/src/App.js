@@ -169,6 +169,10 @@ export default function App() {
         onClose={handleClose}
       >
         <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
+        <DialogContent>
+          <SelectedItems selectedItems={selectedItems} />
+          <TreeView selectedItems={selectedItems} rootDir={rootDir} />
+        </DialogContent>
         <DialogActions>
           {
             selectedItems.length === 1 && (
