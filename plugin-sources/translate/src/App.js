@@ -26,7 +26,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import { styled } from '@mui/material/styles';
 import TranslateIcon from '@mui/icons-material/Translate';
 
-import SelectedItems from './components/SelectedItems';
+import SelectedItems from './components/SelectedItem';
 import TreeView from './components/TreeView';
 import { StyledCancelButton, StyledMainButton } from './components/StyledButton';
 
@@ -39,17 +39,17 @@ const ALERT_AUTO_HIDE_DURATION = 4000;
 
 /**
  * Get root directory
- * If all /site/website => root directory
- * If all /site/components => root directory
+ * If /site/website => root directory
+ * If /site/components => root directory
  * Default: /site
  * @returns root directory
  */
-  const getRootDir = (items) => {
-  if (items.every((elm) => elm.path && elm.path.startsWith(DEFAULT_WEBSITE_PATH))) {
+  const getRootDir = (item) => {
+  if (item.path && item.path.startsWith(DEFAULT_WEBSITE_PATH)) {
     return DEFAULT_WEBSITE_PATH;
   }
 
-  if (items.every((elm) => elm.path && elm.path.startsWith(DEFAULT_COMPONENT_PATH))) {
+  if (item.path && item.path.startsWith(DEFAULT_COMPONENT_PATH)) {
     return DEFAULT_COMPONENT_PATH;
   }
 
@@ -78,8 +78,8 @@ export default function App() {
   const [desPath, setDesPath] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const selectedItems = StudioAPI.getSelectedItems();
-  const rootDir = getRootDir(selectedItems);
+  const selectedItem = StudioAPI.getSelectedItem();
+  const rootDir = getRootDir(selectedItem);
   copyDestSub.subscribe((path) => {
     setDesPath(path);
   });
@@ -107,20 +107,17 @@ export default function App() {
   const handleCopy = async (event, shouldOpenEditForm) => {
     event.preventDefault();
 
-    const selectedItems = StudioAPI.getSelectedItems();
+    const selectedItem = StudioAPI.getSelectedItem();
 
-    if (isProcessing || !desPath || !selectedItems.length) {
+    if (isProcessing || !desPath || !selectedItem || !selectedItem.path) {
       return;
     }
 
     setIsProcessing(true);
-    const paths = selectedItems.map(item => item.path);
-    for (let i =0; i < paths.length; i += 1) {
-      const path = paths[i];
+    const path = selectedItem.path;
       const destinationPath = desPath;
       const res = await StudioAPI.copyItem(path, destinationPath)
       if (res) {
-        console.log(res);
         const pastePath = res.items[0];
         // Open edit form if there is only 1 item
         if (shouldOpenEditForm && paths.length === 1) {
@@ -134,7 +131,6 @@ export default function App() {
           message: `There is an error while copying file: ${paths[i]}`,
         });
       }
-    }
 
     setAlert({
       open: true,
@@ -170,12 +166,12 @@ export default function App() {
       >
         <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
         <DialogContent>
-          <SelectedItems selectedItems={selectedItems} />
-          <TreeView selectedItems={selectedItems} rootDir={rootDir} />
+          <SelectedItem selectedItem={selectedItem} />
+          <TreeView rootDir={rootDir} />
         </DialogContent>
         <DialogActions>
           {
-            selectedItems.length === 1 && (
+            selectedItem && (
               <StyledMainButton
                 variant="contained"
                 color="primary"

@@ -40,23 +40,22 @@ const StudioAPI = {
 
     return CookieHelper.get('crafterSite');
   },
-  getSelectedItems: function() {
+  getSelectedItem: function() {
     if (!craftercms.getStore().getState().preview.guest) {
-      return [];
+      return null;
     }
     const selectedPath = craftercms.getStore().getState().preview.guest.path;
-    if (!selectedPath) return [];
+    if (!selectedPath) return null;
 
     const item = craftercms.getStore().getState().content.itemsByPath[selectedPath];
-    if (!item) return [];
+    if (!item) return null;
 
-    const selectedItem = {
+    return {
       name: item.label,
       path: item.path,
       contentType: item.contentTypeId,
     };
 
-    return [selectedItem];
   },
   openEditForm: function(contentType, path) {
     const site = CrafterCMSNext.system.store.getState().sites.active;

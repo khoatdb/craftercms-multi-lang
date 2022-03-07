@@ -29,8 +29,8 @@ function createData(name, path) {
   return { name, path };
 }
 
-export default function SelectedItem({ selectedItems }) {
-  const rows = selectedItems.map(item => createData(item.name, item.path));
+export default function SelectedItem({ selectedItem }) {
+  const row = createData(selectedItem.name, selectedItem.path);
 
   return (
     <>
@@ -44,16 +44,14 @@ export default function SelectedItem({ selectedItems }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow
-                  key={row.name}
-                >
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell>{row.path}</StyledTableCell>
-                </StyledTableRow>
-              ))}
+              <StyledTableRow
+                key={row.name}
+              >
+                <StyledTableCell component="th" scope="row">
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell>{row.path}</StyledTableCell>
+              </StyledTableRow>
             </TableBody>
           </Table>
         </TableContainer>
