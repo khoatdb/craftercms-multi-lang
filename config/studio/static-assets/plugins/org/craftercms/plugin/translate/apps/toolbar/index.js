@@ -1,4 +1,4 @@
-var { forwardRef, useContext, createContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect, useMemo } = craftercms.libs.React;
+var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect, useMemo } = craftercms.libs.React;
 var React$1 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { unstable_useEnhancedEffect, unstable_useId, useForkRef: useForkRef$1, useControlled: useControlled$1, ownerDocument: ownerDocument$1 } = craftercms.libs.MaterialUI;
 var require$$0 = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
@@ -869,19 +869,19 @@ var anObject$A = anObject$C;
 var concat$3 = uncurryThis$15([].concat);
 
 // all object keys, includes non-enumerable and symbols
-var ownKeys$4 = getBuiltIn$i('Reflect', 'ownKeys') || function ownKeys(it) {
+var ownKeys$5 = getBuiltIn$i('Reflect', 'ownKeys') || function ownKeys(it) {
   var keys = getOwnPropertyNamesModule$2.f(anObject$A(it));
   var getOwnPropertySymbols = getOwnPropertySymbolsModule$2.f;
   return getOwnPropertySymbols ? concat$3(keys, getOwnPropertySymbols(it)) : keys;
 };
 
 var hasOwn$n = hasOwnProperty_1;
-var ownKeys$3 = ownKeys$4;
+var ownKeys$4 = ownKeys$5;
 var getOwnPropertyDescriptorModule$6 = objectGetOwnPropertyDescriptor;
 var definePropertyModule$b = objectDefineProperty;
 
 var copyConstructorProperties$4 = function (target, source, exceptions) {
-  var keys = ownKeys$3(source);
+  var keys = ownKeys$4(source);
   var defineProperty = definePropertyModule$b.f;
   var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule$6.f;
   for (var i = 0; i < keys.length; i++) {
@@ -6362,7 +6362,7 @@ $$1f({ target: 'Object', stat: true, forced: FORCED$c, sham: !DESCRIPTORS$c }, {
 
 var $$1e = _export;
 var DESCRIPTORS$b = descriptors;
-var ownKeys$2 = ownKeys$4;
+var ownKeys$3 = ownKeys$5;
 var toIndexedObject$2 = toIndexedObject$f;
 var getOwnPropertyDescriptorModule$4 = objectGetOwnPropertyDescriptor;
 var createProperty$1 = createProperty$9;
@@ -6373,7 +6373,7 @@ $$1e({ target: 'Object', stat: true, sham: !DESCRIPTORS$b }, {
   getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
     var O = toIndexedObject$2(object);
     var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule$4.f;
-    var keys = ownKeys$2(O);
+    var keys = ownKeys$3(O);
     var result = {};
     var index = 0;
     var key, descriptor;
@@ -7679,12 +7679,12 @@ $$N({ target: 'Reflect', stat: true }, {
 });
 
 var $$M = _export;
-var ownKeys$1 = ownKeys$4;
+var ownKeys$2 = ownKeys$5;
 
 // `Reflect.ownKeys` method
 // https://tc39.es/ecma262/#sec-reflect.ownkeys
 $$M({ target: 'Reflect', stat: true }, {
-  ownKeys: ownKeys$1
+  ownKeys: ownKeys$2
 });
 
 var $$L = _export;
@@ -14262,6 +14262,32 @@ try {
   }
 }
 }(runtime));
+
+function ownKeys$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$2(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+
+  return target;
+}
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -21260,6 +21286,47 @@ function useTheme$3() {
   return theme;
 }
 
+const hasSymbol = typeof Symbol === 'function' && Symbol.for;
+var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
+
+function mergeOuterLocalTheme(outerTheme, localTheme) {
+  if (typeof localTheme === 'function') {
+    const mergedTheme = localTheme(outerTheme);
+
+    return mergedTheme;
+  }
+
+  return _extends({}, outerTheme, localTheme);
+}
+/**
+ * This component takes a `theme` prop.
+ * It makes the `theme` available down the React tree thanks to React context.
+ * This component should preferably be used at **the root of your component tree**.
+ */
+
+
+function ThemeProvider$1(props) {
+  const {
+    children,
+    theme: localTheme
+  } = props;
+  const outerTheme = useTheme$3();
+
+  const theme = React$1.useMemo(() => {
+    const output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
+
+    if (output != null) {
+      output[nested] = outerTheme !== null;
+    }
+
+    return output;
+  }, [localTheme, outerTheme]);
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$1.Provider, {
+    value: theme,
+    children: children
+  });
+}
+
 function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -21784,6 +21851,31 @@ function lighten(color, coefficient) {
 
 function emphasize(color, coefficient = 0.15) {
   return getLuminance(color) > 0.5 ? darken(color, coefficient) : lighten(color, coefficient);
+}
+
+function InnerThemeProvider(props) {
+  const theme = useTheme$1();
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$2.Provider, {
+    value: typeof theme === 'object' ? theme : {},
+    children: props.children
+  });
+}
+/**
+ * This component makes the `theme` available down the React tree.
+ * It should preferably be used at **the root of your component tree**.
+ */
+
+function ThemeProvider(props) {
+  const {
+    children,
+    theme: localTheme
+  } = props;
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeProvider$1, {
+    theme: localTheme,
+    children: /*#__PURE__*/jsxRuntime.exports.jsx(InnerThemeProvider, {
+      children: children
+    })
+  });
 }
 
 function createMixins(breakpoints, spacing, mixins) {
@@ -35646,7 +35738,7 @@ function FileSystemNavigator(_ref) {
   }));
 }
 
-var CrafterCMSNextBridge = CrafterCMSNext.components.CrafterCMSNextBridge;
+CrafterCMSNext.components.CrafterCMSNextBridge;
 var DEFAULT_WEBSITE_PATH = '/site/website';
 var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
@@ -35717,12 +35809,12 @@ function App() {
     setDesPath(path);
   });
   var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  useMemo(function () {
-    return createTheme({
+  var theme = useMemo(function () {
+    return createTheme(_objectSpread2({
       palette: {
         mode: prefersDarkMode ? 'dark' : 'light'
       }
-    });
+    }, CrafterCMSNext.system.defaultThemeOptions));
   }, [prefersDarkMode]);
 
   var resetState = function resetState() {
@@ -35825,8 +35917,8 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(CrafterCMSNextBridge, {
-    themeOptions: CrafterCMSNext.system.defaultThemeOptions
+  return /*#__PURE__*/React$1.createElement(ThemeProvider, {
+    theme: theme
   }, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy

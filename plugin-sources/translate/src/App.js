@@ -94,6 +94,7 @@ export default function App() {
         palette: {
           mode: prefersDarkMode ? 'dark' : 'light',
         },
+        ...CrafterCMSNext.system.defaultThemeOptions
       }),
     [prefersDarkMode],
   );
@@ -164,8 +165,7 @@ export default function App() {
   };
 
   return (
-    <CrafterCMSNextBridge themeOptions={CrafterCMSNext.system.defaultThemeOptions}>
-      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme={theme}>
         { selectedItem && (
           <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
             <TranslateIcon />
@@ -223,7 +223,6 @@ export default function App() {
             </Alert>
           </Snackbar>
         </Stack>
-      {/* </ThemeProvider> */}
-    </CrafterCMSNextBridge>
+      </ThemeProvider>
   );
 }
