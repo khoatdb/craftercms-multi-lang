@@ -165,63 +165,65 @@ export default function App() {
 
   return (
     <CrafterCMSNextBridge>
-      { selectedItem && (
-        <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
-          <TranslateIcon />
-          Translate
-        </StyledPopupButton>
-      )}
-      <Dialog
-        open={open}
-        fullWidth
-        maxWidth="lg"
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        onClose={handleClose}
-      >
-        <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
-        <DialogContent>
-          <SelectedItem selectedItem={selectedItem} />
-          <TreeView rootDir={rootDir} />
-        </DialogContent>
-        <DialogActions>
-          {
-            selectedItem && (
-              <StyledMainButton
+      <ThemeProvider theme={theme}>
+        { selectedItem && (
+          <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
+            <TranslateIcon />
+            Translate
+          </StyledPopupButton>
+        )}
+        <Dialog
+          open={open}
+          fullWidth
+          maxWidth="lg"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          onClose={handleClose}
+        >
+          <DialogTitle id="alert-dialog-title">Translate</DialogTitle>
+          <DialogContent>
+            <SelectedItem selectedItem={selectedItem} />
+            <TreeView rootDir={rootDir} />
+          </DialogContent>
+          <DialogActions>
+            {
+              selectedItem && (
+                <StyledMainButton
+                  variant="contained"
+                  color="primary"
+                  onClick={handleCopyAndOpen}
+                  disabled={isProcessing || !rootDir || !desPath}
+                >
+                  Copy and Edit
+                </StyledMainButton>
+              )
+            }
+            <StyledMainButton
                 variant="contained"
                 color="primary"
-                onClick={handleCopyAndOpen}
+                onClick={handleCopy}
                 disabled={isProcessing || !rootDir || !desPath}
               >
-                Copy and Edit
-              </StyledMainButton>
-            )
-          }
-          <StyledMainButton
-              variant="contained"
-              color="primary"
-              onClick={handleCopy}
-              disabled={isProcessing || !rootDir || !desPath}
-            >
-              Copy
-          </StyledMainButton>
-          <StyledCancelButton
-              variant="outlined"
-              color="primary"
-              onClick={handleClose}
-              disabled={isProcessing}
-            >
-              Close
-            </StyledCancelButton>
-        </DialogActions>
-      </Dialog>
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={alert && alert.open} autoHideDuration={ALERT_AUTO_HIDE_DURATION} onClose={onCloseAlert}>
-          <Alert onClose={onCloseAlert} severity={alert.severity} sx={{ width: '100%' }}>
-            {alert.message}
-          </Alert>
-        </Snackbar>
-      </Stack>
+                Copy
+            </StyledMainButton>
+            <StyledCancelButton
+                variant="outlined"
+                color="primary"
+                onClick={handleClose}
+                disabled={isProcessing}
+              >
+                Close
+              </StyledCancelButton>
+          </DialogActions>
+        </Dialog>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+          <Snackbar open={alert && alert.open} autoHideDuration={ALERT_AUTO_HIDE_DURATION} onClose={onCloseAlert}>
+            <Alert onClose={onCloseAlert} severity={alert.severity} sx={{ width: '100%' }}>
+              {alert.message}
+            </Alert>
+          </Snackbar>
+        </Stack>
+      </ThemeProvider>
     </CrafterCMSNextBridge>
   );
 }
