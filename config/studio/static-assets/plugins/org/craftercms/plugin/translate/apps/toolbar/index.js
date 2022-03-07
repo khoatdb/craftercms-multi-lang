@@ -35554,11 +35554,12 @@ function FileSystemNavigator(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              console.log(nodeId);
               setSelected(nodeId);
               copyDestSub.next(nodeId);
               fetchChildNodes(nodeId);
 
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -35897,11 +35898,7 @@ function App() {
       setDesPath(path);
     });
     return function () {
-      try {
-        copyDestSub.unsubscribe();
-      } catch (ex) {
-        console.log("Subject has been unsubscribed: ".concat(ex));
-      }
+      copyDestSub.unsubscribe();
     };
   }, []);
 

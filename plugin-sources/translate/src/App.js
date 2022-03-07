@@ -135,11 +135,7 @@ export default function App() {
     });
 
     return () => {
-      try {
-        copyDestSub.unsubscribe();
-      } catch (ex) {
-        console.log(`Subject has been unsubscribed: ${ex}`);
-      }
+      copyDestSub.unsubscribe();
     }
   }, []);
 

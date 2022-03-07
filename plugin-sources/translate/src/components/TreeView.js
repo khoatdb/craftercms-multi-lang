@@ -88,6 +88,7 @@ export default function FileSystemNavigator({ selectedItems, rootDir }) {
   }
 
   const handleSelect = async (event, nodeId) => {
+    console.log(nodeId);
     setSelected(nodeId);
     copyDestSub.next(nodeId);
     fetchChildNodes(nodeId);
