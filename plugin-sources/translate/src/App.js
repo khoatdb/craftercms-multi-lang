@@ -63,7 +63,6 @@ const Alert = forwardRef(function Alert(props, ref) {
 
 /**
  * Context menu button to open copy dialog
- * Align with Crafter CMS 3.1.x context menu items
  */
 const StyledPopupButton = styled('a')(({ theme }) => ({
   cursor: 'pointer',

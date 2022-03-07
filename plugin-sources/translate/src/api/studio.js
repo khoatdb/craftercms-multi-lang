@@ -14,13 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import CookieHelper from '../helpers/cookie';
 import HttpHelper from '../helpers/http';
 
 const API_GET_ITEM_TREE = '/studio/api/1/services/api/1/content/get-items-tree.json';
 const API_GET_ITEM = '/studio/api/1/services/api/1/content/get-item.json';
-const API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.json';
-const API_CLIPBOARD_PASTE = '/studio/api/1/services/api/1/clipboard/paste-item.json';
 const API_CREATE_FOLDER = '/studio/api/1/services/api/1/content/create-folder.json';
 const API_RENAME_FOLDER = '/studio/api/1/services/api/1/content/rename-folder.json';
 const API_CONTENT_PASTE = '/studio/api/2/content/paste';
@@ -29,16 +26,8 @@ const StudioAPI = {
   origin() {
     return window.location.origin;
   },
-  xsrfToken() {
-    return CookieHelper.get('XSRF-TOKEN');
-  },
   siteId() {
-    const url = new URL(window.location.href);
-    if (url.searchParams.has('site')) {
-      return url.searchParams.get('site');
-    }
-
-    return CookieHelper.get('crafterSite');
+    return CrafterCMSNext.system.store.getState().sites.active;
   },
   getSelectedItem: function() {
     if (!craftercms.getStore().getState().preview.guest) {
@@ -70,7 +59,6 @@ const StudioAPI = {
         path: path,
         type: 'form',
         authoringBase,
-        readonly: false,  // TODO: make this configurable
         isHidden: false,
         onSaveSuccess: {
           type: 'BATCH_ACTIONS',
@@ -134,29 +122,6 @@ const StudioAPI = {
 
     if (res.status === 200) {
       return res.response;
-    }
-
-    return null;
-  },
-  async clipboardCopy(path) {
-    const body = {
-      item: [{ uri: path }]
-    };
-    const res = await HttpHelper.post(`${StudioAPI.origin()}${API_CLIPBOARD_COPY}?site=${StudioAPI.siteId()}`, body);
-
-    if (res.status === 200) {
-      return true;
-    }
-
-    return false;
-  },
-  async clipboardPaste(parentPath) {
-    const res = await HttpHelper.get(`${StudioAPI.origin()}${API_CLIPBOARD_PASTE}?site=${StudioAPI.siteId()}&parentPath=${parentPath}`);
-
-    if (res.status === 200) {
-      const data = res.response;
-      const filePath = data.status[0];
-      return filePath;
     }
 
     return null;
