@@ -138,6 +138,7 @@ export default function App() {
       console.log(copyDestSub.closed);
       console.log(copyDestSub);
       if (!copyDestSub.closed) {
+        console.log(copyDestSub);
         copyDestSub.unsubscribe();
       }
     }

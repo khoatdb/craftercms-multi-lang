@@ -35901,6 +35901,7 @@ function App() {
       console.log(copyDestSub);
 
       if (!copyDestSub.closed) {
+        console.log(copyDestSub);
         copyDestSub.unsubscribe();
       }
     };
