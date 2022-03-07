@@ -35782,7 +35782,6 @@ function App() {
     setDesPath(path);
   });
   var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  console.log(prefersDarkMode);
   var theme = useMemo(function () {
     return createTheme({
       palette: {
