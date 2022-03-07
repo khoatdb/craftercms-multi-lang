@@ -35897,6 +35897,9 @@ function App() {
       setDesPath(path);
     });
     return function () {
+      console.log(copyDestSub.closed);
+      console.log(copyDestSub);
+
       if (!copyDestSub.closed) {
         copyDestSub.unsubscribe();
       }
