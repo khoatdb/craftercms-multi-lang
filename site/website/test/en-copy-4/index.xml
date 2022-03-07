@@ -12,12 +12,13 @@
 	<folder-name>en-copy-4</folder-name>
 	<createdDate>2022-03-07T04:37:54.580Z</createdDate>
 	<createdDate_dt>2022-03-07T04:37:54.580Z</createdDate_dt>
-	<lastModifiedDate>2022-03-07T04:37:54.580Z</lastModifiedDate>
-	<lastModifiedDate_dt>2022-03-07T04:37:54.580Z</lastModifiedDate_dt>
+	<lastModifiedDate>2022-03-07T04:37:56.993Z</lastModifiedDate>
+	<lastModifiedDate_dt>2022-03-07T04:37:56.993Z</lastModifiedDate_dt>
 	<title_t>Editorial</title_t>
 	<hero_text_html>&lt;p&gt;Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.&lt;/p&gt;</hero_text_html>
 	<hero_title_html>&lt;h1&gt;Hi, I&amp;rsquo;m Editorial&lt;/h1&gt;
-&lt;h3&gt;&lt;span style="font-size: 1.5em;"&gt;by HTML5 UP&lt;/span&gt;&lt;/h3&gt;</hero_title_html>
+&lt;h3&gt;&lt;span style="font-size: 1.5em;"&gt;by HTML5 UP&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;span style="font-size: 1.5em;"&gt;down&lt;/span&gt;&lt;/p&gt;</hero_title_html>
 	<features_o item-list="true">	<item datasource="features">	<key>/site/components/features/4be0a368-783c-8f73-7469-63a62636bd4c.xml</key>
 	<value>Smile</value>
 	<include>/site/components/features/4be0a368-783c-8f73-7469-63a62636bd4c.xml</include>
@@ -82,4 +83,7 @@
 	<features_title_t>Erat lacinia</features_title_t>
 	<disabled>false</disabled>
 	<header_o item-list="true"/>
+	<localeCode_s/>
+	<sourceLocaleCode_s/>
+	<localeSourceId_s>163c8fe8-c683-af92-0342-ab6571775232</localeSourceId_s>
 </page>
