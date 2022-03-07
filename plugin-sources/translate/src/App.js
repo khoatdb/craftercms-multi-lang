@@ -189,7 +189,7 @@ export default function App() {
   };
 
   return (
-    <ThemeProvider>
+    <>
       <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
         Translate
       </StyledPopupButton>
@@ -255,6 +255,6 @@ export default function App() {
           </Alert>
         </Snackbar>
       </Stack>
-    </ThemeProvider>
+    </>
   );
 }
