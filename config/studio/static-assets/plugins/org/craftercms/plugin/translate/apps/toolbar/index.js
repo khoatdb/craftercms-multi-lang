@@ -35913,15 +35913,13 @@ function App() {
     setOpen(false);
   };
 
-  var onClickCopy = function onClickCopy(event) {
-    setOpen(true);
-  };
-
   return /*#__PURE__*/React$1.createElement(ThemeProvider, {
     theme: theme
   }, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
-    onClick: onClickCopy
+    onClick: function onClick() {
+      return setOpen(true);
+    }
   }, /*#__PURE__*/React$1.createElement(default_1$4, null), "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
     open: open,
     fullWidth: true,
