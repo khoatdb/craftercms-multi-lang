@@ -1,4 +1,4 @@
-var { forwardRef, useContext, createContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect } = craftercms.libs.React;
+var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect } = craftercms.libs.React;
 var React$1 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { unstable_useEnhancedEffect, unstable_useId, useForkRef: useForkRef$1, useControlled: useControlled$1, ownerDocument: ownerDocument$1 } = craftercms.libs.MaterialUI;
 var require$$0 = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
@@ -21260,6 +21260,47 @@ function useTheme$3() {
   return theme;
 }
 
+const hasSymbol = typeof Symbol === 'function' && Symbol.for;
+var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
+
+function mergeOuterLocalTheme(outerTheme, localTheme) {
+  if (typeof localTheme === 'function') {
+    const mergedTheme = localTheme(outerTheme);
+
+    return mergedTheme;
+  }
+
+  return _extends({}, outerTheme, localTheme);
+}
+/**
+ * This component takes a `theme` prop.
+ * It makes the `theme` available down the React tree thanks to React context.
+ * This component should preferably be used at **the root of your component tree**.
+ */
+
+
+function ThemeProvider$1(props) {
+  const {
+    children,
+    theme: localTheme
+  } = props;
+  const outerTheme = useTheme$3();
+
+  const theme = React$1.useMemo(() => {
+    const output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
+
+    if (output != null) {
+      output[nested] = outerTheme !== null;
+    }
+
+    return output;
+  }, [localTheme, outerTheme]);
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$1.Provider, {
+    value: theme,
+    children: children
+  });
+}
+
 function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -21784,6 +21825,31 @@ function lighten(color, coefficient) {
 
 function emphasize(color, coefficient = 0.15) {
   return getLuminance(color) > 0.5 ? darken(color, coefficient) : lighten(color, coefficient);
+}
+
+function InnerThemeProvider(props) {
+  const theme = useTheme$1();
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$2.Provider, {
+    value: typeof theme === 'object' ? theme : {},
+    children: props.children
+  });
+}
+/**
+ * This component makes the `theme` available down the React tree.
+ * It should preferably be used at **the root of your component tree**.
+ */
+
+function ThemeProvider(props) {
+  const {
+    children,
+    theme: localTheme
+  } = props;
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeProvider$1, {
+    theme: localTheme,
+    children: /*#__PURE__*/jsxRuntime.exports.jsx(InnerThemeProvider, {
+      children: children
+    })
+  });
 }
 
 function createMixins(breakpoints, spacing, mixins) {
@@ -26051,6 +26117,114 @@ var _default$5 = (0, _createSvgIcon$4.default)( /*#__PURE__*/(0, _jsxRuntime$4.j
 }), 'Translate');
 
 default_1$4 = Translate.default = _default$5;
+
+/**
+ * @deprecated Not used internally. Use `MediaQueryListEvent` from lib.dom.d.ts instead.
+ */
+
+function useMediaQueryOld(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr) {
+  const supportMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia !== 'undefined';
+  const [match, setMatch] = React$1.useState(() => {
+    if (noSsr && supportMatchMedia) {
+      return matchMedia(query).matches;
+    }
+
+    if (ssrMatchMedia) {
+      return ssrMatchMedia(query).matches;
+    } // Once the component is mounted, we rely on the
+    // event listeners to return the correct matches value.
+
+
+    return defaultMatches;
+  });
+  useEnhancedEffect$1(() => {
+    let active = true;
+
+    if (!supportMatchMedia) {
+      return undefined;
+    }
+
+    const queryList = matchMedia(query);
+
+    const updateMatch = () => {
+      // Workaround Safari wrong implementation of matchMedia
+      // TODO can we remove it?
+      // https://github.com/mui/material-ui/pull/17315#issuecomment-528286677
+      if (active) {
+        setMatch(queryList.matches);
+      }
+    };
+
+    updateMatch(); // TODO: Use `addEventListener` once support for Safari < 14 is dropped
+
+    queryList.addListener(updateMatch);
+    return () => {
+      active = false;
+      queryList.removeListener(updateMatch);
+    };
+  }, [query, matchMedia, supportMatchMedia]);
+  return match;
+} // eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
+
+
+const maybeReactUseSyncExternalStore = React$1['useSyncExternalStore' + ''];
+
+function useMediaQueryNew(query, defaultMatches, matchMedia, ssrMatchMedia) {
+  const getDefaultSnapshot = React$1.useCallback(() => defaultMatches, [defaultMatches]);
+  const getServerSnapshot = React$1.useMemo(() => {
+    if (ssrMatchMedia !== null) {
+      const {
+        matches
+      } = ssrMatchMedia(query);
+      return () => matches;
+    }
+
+    return getDefaultSnapshot;
+  }, [getDefaultSnapshot, query, ssrMatchMedia]);
+  const [getSnapshot, subscribe] = React$1.useMemo(() => {
+    if (matchMedia === null) {
+      return [getDefaultSnapshot, () => () => {}];
+    }
+
+    const mediaQueryList = matchMedia(query);
+    return [() => mediaQueryList.matches, notify => {
+      // TODO: Use `addEventListener` once support for Safari < 14 is dropped
+      mediaQueryList.addListener(notify);
+      return () => {
+        mediaQueryList.removeListener(notify);
+      };
+    }];
+  }, [getDefaultSnapshot, matchMedia, query]);
+  const match = maybeReactUseSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return match;
+}
+
+function useMediaQuery(queryInput, options = {}) {
+  const theme = useTheme$2(); // Wait for jsdom to support the match media feature.
+  // All the browsers MUI support have this built-in.
+  // This defensive check is here for simplicity.
+  // Most of the time, the match media logic isn't central to people tests.
+
+  const supportMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia !== 'undefined';
+  const {
+    defaultMatches = false,
+    matchMedia = supportMatchMedia ? window.matchMedia : null,
+    ssrMatchMedia = null,
+    noSsr
+  } = getThemeProps({
+    name: 'MuiUseMediaQuery',
+    props: options,
+    theme
+  });
+
+  let query = typeof queryInput === 'function' ? queryInput(theme) : queryInput;
+  query = query.replace(/^@media( ?)/m, ''); // TODO: Drop `useMediaQueryOld` and use  `use-sync-external-store` shim in `useMediaQueryNew` once the package is stable
+
+  const useMediaQueryImplementation = maybeReactUseSyncExternalStore !== undefined ? useMediaQueryNew : useMediaQueryOld;
+  const match = useMediaQueryImplementation(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr);
+
+  return match;
+}
 
 /**
  * @ignore - internal component.
@@ -35607,6 +35781,14 @@ function App() {
   copyDestSub.subscribe(function (path) {
     setDesPath(path);
   });
+  var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  var theme = React$1.useMemo(function () {
+    return createTheme({
+      palette: {
+        mode: prefersDarkMode ? 'dark' : 'light'
+      }
+    });
+  }, [prefersDarkMode]);
 
   var resetState = function resetState() {
     setDesPath('');
@@ -35708,7 +35890,9 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(React$1.Fragment, null, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
+  return /*#__PURE__*/React$1.createElement(ThemeProvider, {
+    theme: theme
+  }, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
   }, /*#__PURE__*/React$1.createElement(default_1$4, null), "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
