@@ -34,6 +34,8 @@ import { StyledCancelButton, StyledMainButton } from './components/StyledButton'
 import { copyDestSub } from './service/subscribe';
 import StudioAPI from './api/studio';
 
+const CrafterCMSNextBridge = CrafterCMSNext.components.CrafterCMSNextBridge;
+
 const DEFAULT_WEBSITE_PATH = '/site/website';
 const DEFAULT_COMPONENT_PATH = '/site/components';
 const ALERT_AUTO_HIDE_DURATION = 4000;
@@ -162,7 +164,7 @@ export default function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <CrafterCMSNextBridge>
       { selectedItem && (
         <StyledPopupButton className="ItemTranslate cursor" onClick={onClickCopy}>
           <TranslateIcon />
@@ -220,6 +222,6 @@ export default function App() {
           </Alert>
         </Snackbar>
       </Stack>
-    </ThemeProvider>
+    </CrafterCMSNextBridge>
   );
 }

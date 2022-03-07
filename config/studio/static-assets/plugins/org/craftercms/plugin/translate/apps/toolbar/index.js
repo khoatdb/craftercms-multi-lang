@@ -1,4 +1,4 @@
-var { createContext, forwardRef, useContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect, useMemo } = craftercms.libs.React;
+var { forwardRef, useContext, createContext, useLayoutEffect, useRef, createElement: createElement$2, Fragment, Children, isValidElement, cloneElement, useState, useEffect, useMemo } = craftercms.libs.React;
 var React$1 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { unstable_useEnhancedEffect, unstable_useId, useForkRef: useForkRef$1, useControlled: useControlled$1, ownerDocument: ownerDocument$1 } = craftercms.libs.MaterialUI;
 var require$$0 = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
@@ -21260,47 +21260,6 @@ function useTheme$3() {
   return theme;
 }
 
-const hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
-
-function mergeOuterLocalTheme(outerTheme, localTheme) {
-  if (typeof localTheme === 'function') {
-    const mergedTheme = localTheme(outerTheme);
-
-    return mergedTheme;
-  }
-
-  return _extends({}, outerTheme, localTheme);
-}
-/**
- * This component takes a `theme` prop.
- * It makes the `theme` available down the React tree thanks to React context.
- * This component should preferably be used at **the root of your component tree**.
- */
-
-
-function ThemeProvider$1(props) {
-  const {
-    children,
-    theme: localTheme
-  } = props;
-  const outerTheme = useTheme$3();
-
-  const theme = React$1.useMemo(() => {
-    const output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
-
-    if (output != null) {
-      output[nested] = outerTheme !== null;
-    }
-
-    return output;
-  }, [localTheme, outerTheme]);
-  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$1.Provider, {
-    value: theme,
-    children: children
-  });
-}
-
 function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -21825,31 +21784,6 @@ function lighten(color, coefficient) {
 
 function emphasize(color, coefficient = 0.15) {
   return getLuminance(color) > 0.5 ? darken(color, coefficient) : lighten(color, coefficient);
-}
-
-function InnerThemeProvider(props) {
-  const theme = useTheme$1();
-  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeContext$2.Provider, {
-    value: typeof theme === 'object' ? theme : {},
-    children: props.children
-  });
-}
-/**
- * This component makes the `theme` available down the React tree.
- * It should preferably be used at **the root of your component tree**.
- */
-
-function ThemeProvider(props) {
-  const {
-    children,
-    theme: localTheme
-  } = props;
-  return /*#__PURE__*/jsxRuntime.exports.jsx(ThemeProvider$1, {
-    theme: localTheme,
-    children: /*#__PURE__*/jsxRuntime.exports.jsx(InnerThemeProvider, {
-      children: children
-    })
-  });
 }
 
 function createMixins(breakpoints, spacing, mixins) {
@@ -35712,6 +35646,7 @@ function FileSystemNavigator(_ref) {
   }));
 }
 
+var CrafterCMSNextBridge = CrafterCMSNext.components.CrafterCMSNextBridge;
 var DEFAULT_WEBSITE_PATH = '/site/website';
 var DEFAULT_COMPONENT_PATH = '/site/components';
 var ALERT_AUTO_HIDE_DURATION = 4000;
@@ -35782,7 +35717,7 @@ function App() {
     setDesPath(path);
   });
   var prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  var theme = useMemo(function () {
+  useMemo(function () {
     return createTheme({
       palette: {
         mode: prefersDarkMode ? 'dark' : 'light'
@@ -35890,9 +35825,7 @@ function App() {
     setOpen(true);
   };
 
-  return /*#__PURE__*/React$1.createElement(ThemeProvider, {
-    theme: theme
-  }, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
+  return /*#__PURE__*/React$1.createElement(CrafterCMSNextBridge, null, selectedItem && /*#__PURE__*/React$1.createElement(StyledPopupButton, {
     className: "ItemTranslate cursor",
     onClick: onClickCopy
   }, /*#__PURE__*/React$1.createElement(default_1$4, null), "Translate"), /*#__PURE__*/React$1.createElement(Dialog$1, {
