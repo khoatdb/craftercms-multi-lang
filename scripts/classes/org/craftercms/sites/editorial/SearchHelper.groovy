@@ -37,12 +37,15 @@ class SearchHelper {
   static final int DEFAULT_START = 0
   static final int DEFAULT_ROWS = 10
 
+  def locale = "en"
+  
   OpenSearchClientWrapper searchClient
   UrlTransformationService urlTransformationService
 
-  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService) {
+  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService, locale) {
     this.searchClient = searchClient
     this.urlTransformationService = urlTransformationService
+    this.locale = locale
   }
 
   def search(userTerm, categories, start = DEFAULT_START, rows = DEFAULT_ROWS) {
@@ -56,6 +59,12 @@ class SearchHelper {
           .stringValue(ARTICLE_CONTENT_TYPE)
         )
       )
+      .match(m -> m
+      .field("localeCode_s")
+      .query(v -> v
+        .stringValue(this.locale)
+      )
+    )
     )
     if (categories) {
       // Filter by categories
@@ -133,6 +142,14 @@ class SearchHelper {
               .field("content-type")
               .query(v -> v
                 .stringValue(ARTICLE_CONTENT_TYPE)
+              )
+            )
+          )
+          b.filter(f -> f
+            .match(m -> m
+              .field("localeCode_s")
+              .query(v -> v
+                .stringValue(this.locale)
               )
             )
           )
