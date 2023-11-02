@@ -75,7 +75,7 @@
                                 The following content was unable to deploy:
                                 <ul>
                                     <#list files as file>
-                                            <li>${file.internalName!file.name}</li>
+                                            <li>${file.action}: ${file.path} from package ${file.packageId}</li>
                                     </#list>
                                 </ul>
                                     Error:<br/>
