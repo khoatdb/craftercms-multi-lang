@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
-  ~
-  ~ This program is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License version 3 as published by
-  ~ the Free Software Foundation.
-  ~
-  ~ This program is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <page>
-	<content-type>/page/article</content-type>	<display-template>/templates/web/pages/article.ftl</display-template>
+	<content-type>/page/article</content-type>
+	<display-template>/templates/web/pages/article.ftl</display-template>
+	<no-template-required/>
 	<merge-strategy>inherit-levels</merge-strategy>
 	<objectGroupId>b7a7</objectGroupId>
 	<objectId>b7a724f1-3422-055d-a244-5fc79a1ca007</objectId>
-	<sections_o>	<item>	<section_html>&lt;p&gt;Fusce a augue pulvinar, pellentesque magna ac, feugiat diam. Vestibulum ultricies ornare elit sed congue. Quisque vitae urna lacinia, mollis lorem a, iaculis libero. Praesent dolor libero, ullamcorper sed pharetra placerat, pretium in arcu. Cras hendrerit condimentum facilisis. Nullam ac neque finibus, fermentum mauris at, interdum risus. Sed luctus tempor elit eget efficitur.&lt;/p&gt;
+	<sections_o item-list="true">	<item>	<section_html>&lt;p&gt;Fusce a augue pulvinar, pellentesque magna ac, feugiat diam. Vestibulum ultricies ornare elit sed congue. Quisque vitae urna lacinia, mollis lorem a, iaculis libero. Praesent dolor libero, ullamcorper sed pharetra placerat, pretium in arcu. Cras hendrerit condimentum facilisis. Nullam ac neque finibus, fermentum mauris at, interdum risus. Sed luctus tempor elit eget efficitur.&lt;/p&gt;
 &lt;p&gt;Phasellus gravida elit et arcu venenatis, non accumsan eros accumsan. Donec ut justo sed metus placerat viverra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed iaculis elementum feugiat. Curabitur non tincidunt est. Donec in laoreet lacus, nec sodales leo. Etiam justo justo, congue sit amet arcu eget, consequat maximus ante. Aenean rutrum erat at ornare ultricies. Mauris ac dignissim augue. Maecenas sit amet odio aliquam erat venenatis bibendum. Mauris semper ipsum cursus iaculis suscipit. Sed et mauris vulputate, dictum ligula vitae, pellentesque sapien.&lt;/p&gt;
 &lt;p&gt;Nunc mollis condimentum accumsan. Mauris non nibh lectus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ac velit in neque hendrerit fermentum eget non velit. Vestibulum egestas consequat eleifend. Mauris accumsan mattis dolor a scelerisque. Suspendisse faucibus rutrum porttitor. Sed maximus mattis fringilla. Morbi lobortis enim sit amet aliquam efficitur. Nam egestas vel lorem et rutrum.&lt;/p&gt;</section_html>
 	</item>	<item>	<section_html>&lt;p&gt;Etiam suscipit sit amet augue egestas aliquam. Curabitur non nisi et elit eleifend maximus a nec risus. Vivamus pharetra turpis at odio maximus, vitae vestibulum tortor mattis. Donec bibendum libero in nisi suscipit tincidunt. Donec sodales tempus egestas. Phasellus nec leo ac dui congue euismod. Aliquam vitae quam varius, tempor sapien quis, auctor turpis. Nulla volutpat dolor at ligula efficitur, vitae tempor nisl elementum. Fusce congue lobortis tortor nec tincidunt. Suspendisse potenti. Nunc elementum sit amet felis eget imperdiet.&lt;/p&gt;
@@ -40,12 +26,19 @@
 	</item>	<item>	<key>gal</key>
 	<value_smv>Gal</value_smv>
 	</item></segments_o>
-	<date_dt>2020-07-03T04:00:00.000Z</date_dt>
+	<date_dt>2020-07-02T16:00:00.000Z</date_dt>
 	<createdDate>2017-3-3T20:48:50.000Z</createdDate>
 	<createdDate_dt>2017-3-3T20:48:50.000Z</createdDate_dt>
-	<lastModifiedDate>2017-3-15T0:8:13.000Z</lastModifiedDate>
-	<lastModifiedDate_dt>2017-3-15T0:8:13.000Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-02T07:34:03.612Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-02T07:34:03.612Z</lastModifiedDate_dt>
 	<featured_b>false</featured_b>
 	<summary_t>Fusce a augue pulvinar, pellentesque magna ac, feugiat diam. Vestibulum ultricies ornare elit sed congue. Quisque vitae urna lacinia, mollis lorem a, iaculis libero. Praesent dolor libero, ullamcorper sed pharetra placerat, pretium in arcu. </summary_t>
 	<image_s>/static-assets/images/smartphone-pic.jpg</image_s>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<disabled>false</disabled>
+	<header_o item-list="true"/>
+	<left_rail_o item-list="true"/>
+	<localeSourceId_s>e9731eec-4d64-5dd4-56b0-327738a39cb8</localeSourceId_s>
+	<date_dt_tz>Asia/Hong_Kong</date_dt_tz>
 </page>
