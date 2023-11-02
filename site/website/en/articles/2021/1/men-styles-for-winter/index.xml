@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
-  ~
-  ~ This program is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License version 3 as published by
-  ~ the Free Software Foundation.
-  ~
-  ~ This program is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <page>
-	<content-type>/page/article</content-type>	<display-template>/templates/web/pages/article.ftl</display-template>
+	<content-type>/page/article</content-type>
+	<display-template>/templates/web/pages/article.ftl</display-template>
+	<no-template-required/>
 	<merge-strategy>inherit-levels</merge-strategy>
 	<objectGroupId>f1f9</objectGroupId>
 	<objectId>f1f9c488-67e1-7ec0-d3ca-560b194e64d1</objectId>
-	<sections_o>	<item>	<section_html>&lt;p&gt;Nulla sed enim ipsum. Sed ac neque a ligula malesuada volutpat. Donec et ligula rutrum, mattis mauris eget, vestibulum metus. Maecenas non vehicula neque. Nunc ac mauris id ipsum commodo tempus. Integer at dolor consequat, dignissim eros in, imperdiet dui. Aliquam condimentum turpis eget tellus ultrices tincidunt. Pellentesque id varius purus, ac tristique augue. Etiam ut pharetra purus. Vestibulum quis vehicula eros. Mauris laoreet purus nec felis ullamcorper convallis.&lt;/p&gt;
+	<sections_o item-list="true">	<item>	<section_html>&lt;p&gt;Nulla sed enim ipsum. Sed ac neque a ligula malesuada volutpat. Donec et ligula rutrum, mattis mauris eget, vestibulum metus. Maecenas non vehicula neque. Nunc ac mauris id ipsum commodo tempus. Integer at dolor consequat, dignissim eros in, imperdiet dui. Aliquam condimentum turpis eget tellus ultrices tincidunt. Pellentesque id varius purus, ac tristique augue. Etiam ut pharetra purus. Vestibulum quis vehicula eros. Mauris laoreet purus nec felis ullamcorper convallis.&lt;/p&gt;
 &lt;p&gt;Quisque urna purus, posuere nec urna sed, ornare aliquet mauris. In faucibus vitae tellus id iaculis. Donec porttitor, elit eu elementum pulvinar, sapien ex cursus lacus, non ornare ex lectus ut elit. Donec eros ligula, suscipit eu tellus ut, tristique hendrerit tortor. Fusce sollicitudin mollis risus, ut rhoncus magna volutpat vel. Cras auctor, elit id pellentesque semper, neque nibh fermentum ante, sit amet malesuada felis magna nec enim. Vivamus sollicitudin placerat felis, vel blandit dolor sollicitudin a. Nunc vitae volutpat augue. Nunc tristique placerat tortor condimentum sagittis. Sed eu egestas ex, quis auctor neque. Nam eget tellus suscipit, vestibulum augue nec, consequat erat. Mauris malesuada nec ligula non posuere. Proin vitae posuere tortor. Phasellus vulputate quam ut dictum vulputate.&lt;/p&gt;
 &lt;p&gt;Integer ac lectus metus. Ut aliquam ipsum ligula, quis molestie ex pretium sit amet. Morbi porttitor neque vel luctus laoreet. Mauris varius lacus a eros aliquam, in maximus nibh aliquam. Integer sodales consequat metus eget accumsan. Integer viverra mi erat, in hendrerit massa vestibulum placerat. Sed ut gravida nisl, ut cursus neque. Vestibulum tristique rutrum augue vel aliquet.&lt;/p&gt;
 &lt;p&gt;Ut quis faucibus diam. Aliquam dolor metus, laoreet vitae lacinia a, aliquam a tellus. Vivamus sed commodo ipsum, in lacinia nisl. Sed metus diam, porta eget tortor et, vehicula hendrerit sapien. Vestibulum vehicula urna felis, id elementum libero pellentesque id. Vivamus in massa velit. Suspendisse vitae turpis fermentum lectus pellentesque laoreet. Curabitur viverra pretium turpis, eget feugiat mi blandit a. Quisque nisl urna, porta ut urna eget, mattis fringilla nisi. Ut lacus ligula, dapibus ac fermentum ac, rhoncus eget metus. Donec scelerisque, felis vitae viverra iaculis, diam sem gravida tellus, non sodales urna urna sit amet enim. Duis id justo vitae justo suscipit porta placerat vel ligula. Morbi justo nunc, rhoncus laoreet ipsum a, aliquet eleifend dui. In a quam tortor.&lt;/p&gt;
@@ -38,12 +24,19 @@
 	<segments_o>	<item>	<key>guy</key>
 	<value_smv>Guy</value_smv>
 	</item></segments_o>
-	<date_dt>2021-01-05T05:00:00.000Z</date_dt>
+	<date_dt>2021-01-04T16:00:00.000Z</date_dt>
 	<createdDate>2017-3-3T20:57:7.000Z</createdDate>
 	<createdDate_dt>2017-3-3T20:57:7.000Z</createdDate_dt>
-	<lastModifiedDate>2017-3-13T20:33:5.000Z</lastModifiedDate>
-	<lastModifiedDate_dt>2017-3-13T20:33:5.000Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-02T07:34:24.906Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-02T07:34:24.906Z</lastModifiedDate_dt>
 	<featured_b>true</featured_b>
 	<summary_t>Nulla sed enim ipsum. Sed ac neque a ligula malesuada volutpat. Donec et ligula rutrum, mattis mauris eget, vestibulum metus. Maecenas non vehicula neque. Nunc ac mauris id ipsum commodo tempus. Integer at dolor consequat, dignissim eros in, imperdiet dui.</summary_t>
 	<image_s>/static-assets/images/winter-man-pic.jpg</image_s>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<disabled>false</disabled>
+	<header_o item-list="true"/>
+	<left_rail_o item-list="true"/>
+	<localeSourceId_s>71e7d165-c22d-cbf8-8c97-0a9d7136d57d</localeSourceId_s>
+	<date_dt_tz>Asia/Hong_Kong</date_dt_tz>
 </page>
