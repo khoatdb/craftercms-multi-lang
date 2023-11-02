@@ -12,8 +12,8 @@
 	<folder-name>en</folder-name>
 	<createdDate>2017-1-31T16:18:14.000Z</createdDate>
 	<createdDate_dt>2017-1-31T16:18:14.000Z</createdDate_dt>
-	<lastModifiedDate>2022-03-01T20:48:45.446Z</lastModifiedDate>
-	<lastModifiedDate_dt>2022-03-01T20:48:45.446Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-02T07:32:19.805Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-02T07:32:19.805Z</lastModifiedDate_dt>
 	<title_t>Editorial</title_t>
 	<hero_text_html>&lt;p&gt;Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.&lt;/p&gt;</hero_text_html>
 	<hero_title_html>&lt;h1&gt;Hi, I&amp;rsquo;m Editorial&lt;/h1&gt;
@@ -82,4 +82,7 @@
 	<features_title_t>Erat lacinia</features_title_t>
 	<disabled>false</disabled>
 	<header_o item-list="true"/>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<localeSourceId_s>e0affdbc-d729-523b-e8c2-aa20d07f2b1f</localeSourceId_s>
 </page>
