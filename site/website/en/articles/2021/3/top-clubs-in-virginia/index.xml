@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
-  ~
-  ~ This program is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License version 3 as published by
-  ~ the Free Software Foundation.
-  ~
-  ~ This program is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <page>
-	<content-type>/page/article</content-type>	<display-template>/templates/web/pages/article.ftl</display-template>
+	<content-type>/page/article</content-type>
+	<display-template>/templates/web/pages/article.ftl</display-template>
+	<no-template-required/>
 	<merge-strategy>inherit-levels</merge-strategy>
 	<objectGroupId>52e8</objectGroupId>
 	<objectId>52e8e75d-94f8-ae0b-3317-8d592b3d7dce</objectId>
-	<sections_o>	<item>	<section_html>&lt;p&gt;Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam a elit justo. Morbi sagittis pulvinar tristique. Aenean pharetra risus a libero faucibus, iaculis porta mi ornare. Ut suscipit efficitur ultrices. Vestibulum odio enim, luctus consectetur diam nec, molestie porta mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce molestie mattis felis, eget aliquet nisi ultricies dapibus. Donec congue nibh nec nisi mattis, sit amet tempor tellus sollicitudin. Mauris accumsan ipsum leo, consectetur pretium tellus aliquet in. Praesent egestas lectus non sollicitudin gravida. Curabitur faucibus consectetur nulla, nec maximus nisl venenatis vel. Nulla sit amet felis quis dui imperdiet fermentum nec eget sapien. In porta, augue eget porta aliquam, massa tellus hendrerit lectus, et lobortis nulla libero ut eros. Ut cursus efficitur libero, vel accumsan odio tincidunt vitae. Donec ligula dui, lacinia eget nunc ac, gravida blandit dolor.&lt;/p&gt;
+	<sections_o item-list="true">	<item>	<section_html>&lt;p&gt;Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam a elit justo. Morbi sagittis pulvinar tristique. Aenean pharetra risus a libero faucibus, iaculis porta mi ornare. Ut suscipit efficitur ultrices. Vestibulum odio enim, luctus consectetur diam nec, molestie porta mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce molestie mattis felis, eget aliquet nisi ultricies dapibus. Donec congue nibh nec nisi mattis, sit amet tempor tellus sollicitudin. Mauris accumsan ipsum leo, consectetur pretium tellus aliquet in. Praesent egestas lectus non sollicitudin gravida. Curabitur faucibus consectetur nulla, nec maximus nisl venenatis vel. Nulla sit amet felis quis dui imperdiet fermentum nec eget sapien. In porta, augue eget porta aliquam, massa tellus hendrerit lectus, et lobortis nulla libero ut eros. Ut cursus efficitur libero, vel accumsan odio tincidunt vitae. Donec ligula dui, lacinia eget nunc ac, gravida blandit dolor.&lt;/p&gt;
 &lt;p&gt;Suspendisse malesuada, libero rhoncus interdum dictum, enim leo blandit elit, ut varius ligula urna at tortor. Mauris porta tellus quis nisl ultricies, a euismod justo varius. In cursus mi id suscipit commodo. Nulla in luctus mi, a aliquam turpis. Integer efficitur a magna id volutpat. Aenean vel eleifend nulla. Sed et bibendum neque. Etiam a quam ut ligula vehicula ornare. Quisque ultrices quam dui, ut facilisis urna aliquet id. Maecenas porta ipsum pretium turpis efficitur finibus. Etiam pulvinar ipsum ac turpis ornare feugiat. Curabitur placerat eu dui at consequat. Aliquam gravida, est rutrum iaculis cursus, risus urna tincidunt nunc, sed tempus felis justo nec tortor. Proin rutrum magna mi, in consectetur turpis rhoncus sit amet.&lt;/p&gt;</section_html>
 	</item>	<item>	<section_html>&lt;p&gt;Aliquam bibendum eros vel libero tincidunt, ac consectetur tortor blandit. Proin auctor odio neque. Duis vel consectetur nunc, nec hendrerit justo. Nunc tristique fermentum odio ac bibendum. Fusce egestas risus at vehicula efficitur. Ut eleifend, nisl quis vestibulum dapibus, magna nisl pulvinar purus, quis vestibulum augue tortor nec neque. Phasellus fringilla pretium ipsum vitae hendrerit. Praesent posuere erat et odio pulvinar vehicula. Suspendisse sit amet dapibus justo, at rutrum justo. Duis ac erat quis felis porttitor gravida. Fusce ac neque augue. Aliquam rutrum rutrum eros vitae varius. Phasellus sit amet pharetra velit, sit amet scelerisque neque. Integer eget mauris mauris. Etiam luctus, orci non pharetra egestas, nunc turpis congue sem, eu semper nisi sapien vel lorem. Ut at pellentesque libero.&lt;/p&gt;
 &lt;p&gt;Curabitur vestibulum, odio vel lacinia faucibus, turpis elit imperdiet elit, et pellentesque leo sem ut lorem. Aliquam lacinia maximus lectus, at ultrices nulla tempus a. Suspendisse vestibulum nibh et pulvinar finibus. Integer ac consequat lectus. Nullam venenatis varius ante vel elementum. Integer nisi odio, condimentum vitae semper eu, commodo at enim. Maecenas fringilla lorem vel arcu luctus, in feugiat lectus mollis. Curabitur a ligula nulla. Pellentesque gravida accumsan nunc, et semper dolor ornare nec. Etiam faucibus risus id neque euismod, vel scelerisque ligula malesuada.&lt;/p&gt;
@@ -43,9 +29,16 @@
 	<featured_b>true</featured_b>
 	<summary_t>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam a elit justo. Morbi sagittis pulvinar tristique. Aenean pharetra risus a libero faucibus, iaculis porta mi ornare.</summary_t>
 	<image_s>/static-assets/images/clubs-virginia-pic.jpg</image_s>
-	<date_dt>2021-03-05T05:00:00.000Z</date_dt>
+	<date_dt>2021-03-04T16:00:00.000Z</date_dt>
 	<createdDate>2017-3-15T0:3:41.000Z</createdDate>
 	<createdDate_dt>2017-3-15T0:3:41.000Z</createdDate_dt>
-	<lastModifiedDate>2017-3-15T0:3:41.000Z</lastModifiedDate>
-	<lastModifiedDate_dt>2017-3-15T0:3:41.000Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-02T07:36:16.881Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-02T07:36:16.881Z</lastModifiedDate_dt>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<disabled>false</disabled>
+	<header_o item-list="true"/>
+	<left_rail_o item-list="true"/>
+	<localeSourceId_s>659d92ca-4014-a4cb-f1d1-977841c28b88</localeSourceId_s>
+	<date_dt_tz>Asia/Hong_Kong</date_dt_tz>
 </page>
