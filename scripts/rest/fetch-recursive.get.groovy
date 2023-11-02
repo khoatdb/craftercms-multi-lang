@@ -1,10 +1,10 @@
 import org.apache.commons.lang3.StringUtils
 import org.craftercms.engine.service.UrlTransformationService
-import org.elasticsearch.action.search.SearchRequest
-import org.elasticsearch.index.query.QueryBuilders
-import org.elasticsearch.search.builder.SearchSourceBuilder
-import org.elasticsearch.search.sort.FieldSortBuilder
-import org.elasticsearch.search.sort.SortOrder
+import org.opensearch.action.search.SearchRequest
+import org.opensearch.index.query.QueryBuilders
+import org.opensearch.search.builder.SearchSourceBuilder
+import org.opensearch.search.sort.FieldSortBuilder
+import org.opensearch.search.sort.SortOrder
 
 def contentObject = [:]
 def pageId = (params.id) ? params.id : "/site/website/index.xml"

@@ -16,15 +16,15 @@
 
 package org.craftercms.sites.editorial
 
-import co.elastic.clients.elasticsearch._types.SortOrder
-import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery
-import co.elastic.clients.elasticsearch._types.query_dsl.Query
-import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType
-import co.elastic.clients.elasticsearch.core.SearchRequest
-import co.elastic.clients.elasticsearch.core.search.Highlight
+import org.opensearch.client.opensearch._types.SortOrder
+import org.opensearch.client.opensearch._types.query_dsl.BoolQuery
+import org.opensearch.client.opensearch._types.query_dsl.Query
+import org.opensearch.client.opensearch._types.query_dsl.TextQueryType
+import org.opensearch.client.opensearch.core.SearchRequest
+import org.opensearch.client.opensearch.core.search.Highlight
 import org.apache.commons.lang3.StringUtils
 import org.craftercms.engine.service.UrlTransformationService
-import org.craftercms.search.elasticsearch.client.ElasticsearchClientWrapper
+import org.craftercms.search.opensearch.client.OpenSearchClientWrapper
 
 class SearchHelper {
 
@@ -37,10 +37,10 @@ class SearchHelper {
   static final int DEFAULT_START = 0
   static final int DEFAULT_ROWS = 10
 
-  ElasticsearchClientWrapper elasticsearchClient
+  OpenSearchClientWrapper elasticsearchClient
   UrlTransformationService urlTransformationService
 
-  SearchHelper(ElasticsearchClientWrapper elasticsearchClient, UrlTransformationService urlTransformationService) {
+  SearchHelper(OpenSearchClientWrapper elasticsearchClient, UrlTransformationService urlTransformationService) {
     this.elasticsearchClient = elasticsearchClient
     this.urlTransformationService = urlTransformationService
   }
