@@ -79,7 +79,7 @@
                                     </#list>
                                 </ul>
                                     Error:<br/>
-                                    ${deploymentError.toString()}
+                                    <pre>${deploymentError}</pre>
                                 <br/><br/>
                             </p>
                         </body>
