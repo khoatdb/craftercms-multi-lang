@@ -24,11 +24,11 @@
 	<segments_o>	<item>	<key>gal</key>
 	<value_smv>Gal</value_smv>
 	</item></segments_o>
-	<date_dt>2020-12-28T05:00:00.000Z</date_dt>
+	<date_dt>2020-12-27T16:00:00.000Z</date_dt>
 	<createdDate>2017-3-2T20:48:57.000Z</createdDate>
 	<createdDate_dt>2017-3-2T20:48:57.000Z</createdDate_dt>
-	<lastModifiedDate>2019-12-03T09:24:33.150Z</lastModifiedDate>
-	<lastModifiedDate_dt>2019-12-03T09:24:33.150Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-02T07:33:12.422Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-02T07:33:12.422Z</lastModifiedDate_dt>
 	<featured_b>false</featured_b>
 	<summary_t>Curabitur lobortis laoreet vehicula. Integer condimentum non mauris in bibendum. Morbi et facilisis nisl. In suscipit eros sapien, ut venenatis quam interdum gravida. Praesent ultricies interdum dictum.</summary_t>
 	<image_s>/static-assets/images/book-woman-pic.jpg</image_s>
@@ -36,4 +36,7 @@
 	<header_o item-list="true"/>
 	<left_rail_o item-list="true"/>
 	<date_dt_tz>EST5EDT</date_dt_tz>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<localeSourceId_s>73a615c5-d4ca-4c16-6aa6-f0a8fa784cd5</localeSourceId_s>
 </page>
