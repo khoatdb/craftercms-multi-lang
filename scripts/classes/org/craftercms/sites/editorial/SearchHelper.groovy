@@ -37,16 +37,15 @@ class SearchHelper {
   static final int DEFAULT_START = 0
   static final int DEFAULT_ROWS = 10
 
-  def locale = "es"
+  def locale = "en"
   
   OpenSearchClientWrapper searchClient
   UrlTransformationService urlTransformationService
 
-  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService) {
+  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService, locale) {
     this.searchClient = searchClient
     this.urlTransformationService = urlTransformationService
     this.locale = locale
-    xxx
   }
 
   def search(userTerm, categories, start = DEFAULT_START, rows = DEFAULT_ROWS) {
