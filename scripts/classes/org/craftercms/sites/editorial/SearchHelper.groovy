@@ -46,6 +46,7 @@ class SearchHelper {
     this.searchClient = searchClient
     this.urlTransformationService = urlTransformationService
     this.locale = locale
+    xxx
   }
 
   def search(userTerm, categories, start = DEFAULT_START, rows = DEFAULT_ROWS) {
