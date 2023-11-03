@@ -45,7 +45,7 @@ class SearchHelper {
   SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService) {
     this.searchClient = searchClient
     this.urlTransformationService = urlTransformationService
-    this.locale = locale
+    this.locale = "es"
   }
 
   def search(userTerm, categories, start = DEFAULT_START, rows = DEFAULT_ROWS) {
