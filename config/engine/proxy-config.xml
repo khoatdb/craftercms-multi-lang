@@ -55,7 +55,7 @@
       </server>
       <server>
          <id>preview</id>
-         <url></url>
+         <url>http://10.89.1.32:3000</url>
          <patterns>
             <pattern>.*</pattern>
          </patterns>
