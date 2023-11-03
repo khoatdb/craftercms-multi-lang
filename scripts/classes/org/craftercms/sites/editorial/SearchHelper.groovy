@@ -42,7 +42,7 @@ class SearchHelper {
   OpenSearchClientWrapper searchClient
   UrlTransformationService urlTransformationService
 
-  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService, locale) {
+  SearchHelper(OpenSearchClientWrapper searchClient, UrlTransformationService urlTransformationService) {
     this.searchClient = searchClient
     this.urlTransformationService = urlTransformationService
     this.locale = locale
