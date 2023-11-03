@@ -37,7 +37,7 @@ class SearchHelper {
   static final int DEFAULT_START = 0
   static final int DEFAULT_ROWS = 10
 
-  def locale = "en"
+  def locale = "es"
   
   OpenSearchClientWrapper searchClient
   UrlTransformationService urlTransformationService
