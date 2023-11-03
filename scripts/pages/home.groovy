@@ -19,7 +19,7 @@ import org.craftercms.sites.editorial.ProfileUtils
 
 def segment = ProfileUtils.getSegment(profile, siteItemService)
 def siteLocale = request.getRequestURI().substring(1,3)
-def searchHelper = new SearchHelper(searchClient, urlTransformationService)
+def searchHelper = new SearchHelper(searchClient, urlTransformationService, siteLocale)
 def articles = searchHelper.searchArticles(true, null, segment)
 
 templateModel.articles = articles
