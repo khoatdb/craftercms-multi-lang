@@ -23,7 +23,8 @@ if (authToken) {
     segment = ProfileUtils.getSegment(authToken.principal, siteItemService)
 }
 
-def searchHelper = new SearchHelper(elasticsearchClient, urlTransformationService)
+def siteLocale = request.getRequestURI().substring(1,3)
+def searchHelper = new SearchHelper(elasticsearchClient, urlTransformationService, siteLocale)
 def articles = searchHelper.searchArticles(false, null, segment, 0, 3)
 
 templateModel.articles = articles
