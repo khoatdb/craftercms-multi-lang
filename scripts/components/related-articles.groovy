@@ -23,7 +23,8 @@ if (authToken) {
     segment = ProfileUtils.getSegment(authToken.principal, siteItemService)
 }
 
-def searchHelper = new SearchHelper(elasticsearchClient, urlTransformationService)
+def siteLocale = request.getRequestURI().substring(1,3)
+def searchHelper = new SearchHelper(elasticsearchClient, urlTransformationService, siteLocale)
 // articleCategories and articlePath should be provided as additionalModel of the component and
 // should be the categories of the current article
 def articles = searchHelper.searchArticles(false, articleCategories, segment, 0, 3, "-localId:\"${articlePath}\"")
