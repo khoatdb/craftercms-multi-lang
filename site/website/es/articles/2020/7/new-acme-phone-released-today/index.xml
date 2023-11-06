@@ -14,7 +14,7 @@
 	</item></sections_o>
 	<internal-name>New ACME Phone Released Today</internal-name>
 	<title_t>New ACME Phone Released Today</title_t>
-	<subject_t>New ACME Phone Released Today</subject_t>
+	<subject_t>New ACME Phone Released Today ES</subject_t>
 	<author_s>John Doe</author_s>
 	<file-name>index.xml</file-name>
 	<folder-name>new-acme-phone-released-today</folder-name>
@@ -29,8 +29,8 @@
 	<date_dt>2020-07-02T16:00:00.000Z</date_dt>
 	<createdDate>2023-11-06T03:16:36.279Z</createdDate>
 	<createdDate_dt>2023-11-06T03:16:36.279Z</createdDate_dt>
-	<lastModifiedDate>2023-11-06T03:16:36.279Z</lastModifiedDate>
-	<lastModifiedDate_dt>2023-11-06T03:16:36.279Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-06T04:06:32.070Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-06T04:06:32.070Z</lastModifiedDate_dt>
 	<featured_b>false</featured_b>
 	<summary_t>Fusce a augue pulvinar, pellentesque magna ac, feugiat diam. Vestibulum ultricies ornare elit sed congue. Quisque vitae urna lacinia, mollis lorem a, iaculis libero. Praesent dolor libero, ullamcorper sed pharetra placerat, pretium in arcu. </summary_t>
 	<image_s>/static-assets/images/smartphone-pic.jpg</image_s>
