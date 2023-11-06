@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<content-type>/page/article</content-type>
+	<display-template>/templates/web/pages/article.ftl</display-template>
+	<no-template-required/>
+	<merge-strategy>inherit-levels</merge-strategy>
+	<objectGroupId>9f22ef2d</objectGroupId>
+	<objectId>9f22ef2d-44df-4d83-b63c-7b31ba1ffa3d</objectId>
+	<sections_o item-list="true">	<item>	<section_html>&lt;p&gt;Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean rhoncus, nulla ut mattis tempor, lorem arcu malesuada purus, sit amet pretium diam ligula at ante. Suspendisse potenti. Aliquam erat volutpat. Donec finibus, lectus et scelerisque euismod, est orci fermentum risus, a ullamcorper nisi tellus pellentesque eros. Maecenas vitae dui fringilla, porttitor ipsum eget, blandit felis. Nunc a eleifend velit, posuere vulputate dolor. Nam semper porttitor laoreet. Nunc sodales eget nisl eget lobortis.&lt;/p&gt;
+&lt;p&gt;Maecenas ligula mi, aliquet eu rhoncus ut, consectetur in nulla. Etiam sed venenatis sapien. Aenean ullamcorper, turpis vitae interdum malesuada, turpis leo interdum nisi, a placerat sem dui at justo. Aliquam a lobortis orci. Etiam eget vestibulum turpis, ac pulvinar nunc. Morbi id risus ante. Nulla rhoncus feugiat odio, ac accumsan ante scelerisque ut. Phasellus porttitor turpis vel enim dignissim auctor.&lt;/p&gt;
+&lt;p&gt;Donec ut rutrum nisl. Donec facilisis condimentum neque sit amet viverra. Donec nec tellus vitae dui bibendum tristique sed ac ante. Quisque ullamcorper nibh ipsum, vitae feugiat ex sagittis sed. Nullam pharetra massa lorem. Aliquam vitae ex vel massa lobortis elementum. In lorem elit, hendrerit eu scelerisque eu, dignissim eget est. Donec pharetra eget eros vitae fermentum. Suspendisse potenti.&lt;/p&gt;</section_html>
+	</item></sections_o>
+	<file-name>index.xml</file-name>
+	<folder-name>coffee-is-good-for-your-health</folder-name>
+	<internal-name>Coffee is Good for Your Health</internal-name>
+	<title_t>Coffee is Good for Your Health</title_t>
+	<subject_t>Coffee is Good for Your Health</subject_t>
+	<author_s>John Doe</author_s>
+	<categories_o>	<item>	<key>health</key>
+	<value_smv>Health</value_smv>
+	</item></categories_o>
+	<segments_o>	<item>	<key>guy</key>
+	<value_smv>Guy</value_smv>
+	</item>	<item>	<key>gal</key>
+	<value_smv>Gal</value_smv>
+	</item></segments_o>
+	<date_dt>2020-06-13T16:00:00.000Z</date_dt>
+	<createdDate>2023-11-06T03:16:35.339Z</createdDate>
+	<createdDate_dt>2023-11-06T03:16:35.339Z</createdDate_dt>
+	<lastModifiedDate>2023-11-06T03:16:35.339Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-06T03:16:35.339Z</lastModifiedDate_dt>
+	<featured_b>false</featured_b>
+	<summary_t>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean rhoncus, nulla ut mattis tempor, lorem arcu malesuada purus, sit amet pretium diam ligula at ante. Suspendisse potenti.</summary_t>
+	<image_s>/static-assets/images/coffee-pic.jpg</image_s>
+	<localeCode_s>en</localeCode_s>
+	<sourceLocaleCode_s>en</sourceLocaleCode_s>
+	<localeSourceId_s>f3ae40b8-b15a-a1d8-f7cf-d3ee22fd489f</localeSourceId_s>
+	<disabled>false</disabled>
+	<header_o item-list="true"/>
+	<left_rail_o item-list="true"/>
+	<date_dt_tz>Asia/Hong_Kong</date_dt_tz>
+</page>
