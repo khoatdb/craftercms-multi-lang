@@ -16,7 +16,7 @@
 	<folder-name>men-styles-for-winter</folder-name>
 	<internal-name>Men Styles For Winter</internal-name>
 	<title_t>Men Styles For Winter</title_t>
-	<subject_t>Men Styles For Winter</subject_t>
+	<subject_t>Men Styles For Winter ES</subject_t>
 	<author_s>John Doe</author_s>
 	<categories_o>	<item>	<key>style</key>
 	<value_smv>Style</value_smv>
@@ -27,8 +27,8 @@
 	<date_dt>2021-01-04T16:00:00.000Z</date_dt>
 	<createdDate>2023-11-06T03:16:37.648Z</createdDate>
 	<createdDate_dt>2023-11-06T03:16:37.648Z</createdDate_dt>
-	<lastModifiedDate>2023-11-06T03:16:37.648Z</lastModifiedDate>
-	<lastModifiedDate_dt>2023-11-06T03:16:37.648Z</lastModifiedDate_dt>
+	<lastModifiedDate>2023-11-06T04:16:24.426Z</lastModifiedDate>
+	<lastModifiedDate_dt>2023-11-06T04:16:24.426Z</lastModifiedDate_dt>
 	<featured_b>true</featured_b>
 	<summary_t>Nulla sed enim ipsum. Sed ac neque a ligula malesuada volutpat. Donec et ligula rutrum, mattis mauris eget, vestibulum metus. Maecenas non vehicula neque. Nunc ac mauris id ipsum commodo tempus. Integer at dolor consequat, dignissim eros in, imperdiet dui.</summary_t>
 	<image_s>/static-assets/images/winter-man-pic.jpg</image_s>
