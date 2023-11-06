@@ -32,7 +32,7 @@
 	<featured_b>true</featured_b>
 	<summary_t>Ut pellentesque nibh porta lacinia porta. Nam eleifend aliquam tellus sit amet sagittis. Maecenas id eros velit. Donec feugiat iaculis augue eu egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</summary_t>
 	<image_s>/static-assets/images/six-pack-pic.jpg</image_s>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<disabled>false</disabled>
 	<header_o item-list="true"/>
