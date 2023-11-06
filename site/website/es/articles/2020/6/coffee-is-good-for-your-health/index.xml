@@ -32,7 +32,7 @@
 	<featured_b>false</featured_b>
 	<summary_t>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean rhoncus, nulla ut mattis tempor, lorem arcu malesuada purus, sit amet pretium diam ligula at ante. Suspendisse potenti.</summary_t>
 	<image_s>/static-assets/images/coffee-pic.jpg</image_s>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<localeSourceId_s>f3ae40b8-b15a-a1d8-f7cf-d3ee22fd489f</localeSourceId_s>
 	<disabled>false</disabled>
