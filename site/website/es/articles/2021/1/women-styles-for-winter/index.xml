@@ -32,7 +32,7 @@
 	<featured_b>true</featured_b>
 	<summary_t>Donec quis justo ligula. Ut commodo nibh sit amet ultrices ultricies. Curabitur tempus venenatis vulputate. Quisque dignissim interdum tempus. Pellentesque luctus justo augue, vel gravida orci rutrum a. Sed elementum est sapien.</summary_t>
 	<image_s>/static-assets/images/winter-woman-pic.jpg</image_s>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<localeSourceId_s>7b36e060-7989-90c6-3b3c-10c9a9841c4c</localeSourceId_s>
 	<disabled>false</disabled>
