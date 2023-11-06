@@ -149,7 +149,7 @@ class SearchHelper {
             .match(m -> m
               .field("localeCode_s")
               .query(v -> v
-                .stringValue("en")
+                .stringValue(this.locale)
               )
             )
           )
