@@ -34,7 +34,7 @@
 	<featured_b>false</featured_b>
 	<summary_t>Fusce a augue pulvinar, pellentesque magna ac, feugiat diam. Vestibulum ultricies ornare elit sed congue. Quisque vitae urna lacinia, mollis lorem a, iaculis libero. Praesent dolor libero, ullamcorper sed pharetra placerat, pretium in arcu. </summary_t>
 	<image_s>/static-assets/images/smartphone-pic.jpg</image_s>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<disabled>false</disabled>
 	<header_o item-list="true"/>
