@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License version 3 as published by
+  ~ the Free Software Foundation.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  --><component>
+  <content-type>/component/level-descriptor</content-type>
+  <display-template/>
+  <merge-strategy>inherit-levels</merge-strategy>
+  <objectGroupId>6f71658a</objectGroupId>
+  <objectId>6f71658a-7f21-4cd7-98b8-332a3c868b93</objectId>
+  <file-name>crafter-level-descriptor.level.xml</file-name>
+  <folder-name>/site/website/es</folder-name>
+  <left_rail_o>
+    <item>
+      <key>/site/components/left-rails/left-rail-with-related-articles.xml</key>
+      <value>Left Rail with Related Articles</value>
+      <include>/site/components/left-rails/left-rail-with-related-articles.xml</include>
+      <disableFlattening>false</disableFlattening>
+    </item>
+  </left_rail_o>
+  <createdDate>2023-11-06T03:16:33.244Z</createdDate>
+  <createdDate_dt>2023-11-06T03:16:33.244Z</createdDate_dt>
+  <lastModifiedDate>2023-11-06T03:16:33.244Z</lastModifiedDate>
+  <lastModifiedDate_dt>2023-11-06T03:16:33.244Z</lastModifiedDate_dt>
+</component>
