@@ -33,7 +33,7 @@
 	<image_s>/static-assets/images/romantic-pic.jpg</image_s>
 	<header_o item-list="true"/>
 	<left_rail_o item-list="true"/>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<localeSourceId_s>afb698b0-4b13-d2ca-903e-aadb4325fad7</localeSourceId_s>
 	<disabled>false</disabled>
