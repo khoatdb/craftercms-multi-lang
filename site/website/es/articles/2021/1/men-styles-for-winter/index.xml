@@ -32,7 +32,7 @@
 	<featured_b>true</featured_b>
 	<summary_t>Nulla sed enim ipsum. Sed ac neque a ligula malesuada volutpat. Donec et ligula rutrum, mattis mauris eget, vestibulum metus. Maecenas non vehicula neque. Nunc ac mauris id ipsum commodo tempus. Integer at dolor consequat, dignissim eros in, imperdiet dui.</summary_t>
 	<image_s>/static-assets/images/winter-man-pic.jpg</image_s>
-	<localeCode_s>en</localeCode_s>
+	<localeCode_s>es</localeCode_s>
 	<sourceLocaleCode_s>en</sourceLocaleCode_s>
 	<disabled>false</disabled>
 	<header_o item-list="true"/>
