@@ -14,19 +14,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @author Dejan Brkic
+ */
+
+import org.apache.commons.lang3.StringUtils
+
 def result = [:]
-def topNavItems = [:]
-def siteDir = siteItemService.getSiteTree("/site/website", 2)
-if(siteDir) {
-    def dirs = siteDir.childItems
-    dirs.each { dir ->
-            def dirName = dir.getStoreName()
-            def dirItem = siteItemService.getSiteItem("/site/website/${dirName}/index.xml")
-            if (dirItem != null) {
-                def dirDisplayName = dirItem.queryValue('internal-name')
-                   topNavItems.put(dirName, dirDisplayName)
-            }
-   }
+def site = params.site_id
+def path = params.path
+def depth = params.depth.toInteger()
+def order = params.order
+
+/** Validate Parameters */
+def invalidParams = false
+def paramsList = []
+
+if (invalidParams) {
+    response.setStatus(400)
+    result.message = "Invalid parameter(s): " + paramsList
+} else {
+    result.item = siteItemService.getSiteTree(path, depth)
+
 }
-result.topNavItems = topNavItems;
-return result;
+return result
